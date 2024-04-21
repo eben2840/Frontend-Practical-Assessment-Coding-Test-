@@ -34,8 +34,8 @@ import secrets
 app=Flask(__name__)
 CORS(app)
 # 'postgresql://postgres:new_password@45.222.128.55:5432/src'
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:new_password@45.222.128.55:5432/eben'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:new_password@45.222.128.55:5432/eben'
 # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("CENTRAL_MINISTRY_DB_URL","sqlite:///test.db")
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:new_password@45.222.128.55:5432/src'
 app.config['SECRET_KEY'] ="thisismysecretkey"
@@ -566,9 +566,9 @@ def add_item():
         
        
             
-        flash("Staff added successfully", "Success")
+        flash("Order Item Placed.", "Success")
 
-        return redirect(url_for('homelook'))
+        return redirect(url_for('admindashboard'))
 
     print(form.errors)
     return render_template('add_item.html', form=form)
@@ -591,16 +591,14 @@ def send_email():
         
         
         
-        user = User.query.first()
+        
         # HTML content of the email
-        if user:
-            session['user_id'] = user.id
-        else:
+        
         # Handle the case where the user object is not found or doesn't have an ID
-            print("Broo you dont have access")
+            # print("Broo you dont have access")
 # users = User.query.order_by(User.id.desc()).all()   
         users=User.query.order_by(User.id.desc()).all()
-        html_content = render_template('printout.html',users=users, session_user_id=session['user_id'])
+        html_content = render_template('printout.html',users=users)
         
         # return render_template("emailsender.html",users=users)
 
@@ -804,11 +802,9 @@ def searchcode():
     hundred = Course.query.filter_by(level='100').all()
     return render_template('level100.html', hundred=hundred)
 
-@app.route('/level200', methods=['GET', 'POST'])
-def level200():
-    sendtelegram("New User on Pasco Portal level 200")
-    two = Course.query.filter_by(level='200').all()
-    return render_template('level200.html', two=two)
+@app.route('/forms', methods=['GET', 'POST'])
+def forms():
+    return render_template('gvs/flayouts.html')
 
 
 @app.route('/emailsender', methods=['GET', 'POST'])
@@ -1614,8 +1610,10 @@ def homme():
 
 @app.route('/', methods=['GET', 'POST'])
 def working():
-        users=User.query.order_by(User.id.desc()).all()
-        return render_template("404.html",users=users)
+        # users=User.query.order_by(User.id.desc()).all()
+        return render_template("gvs/index.html")
+    
+    
 
 @app.route('/thank', methods=['GET', 'POST'])
 def thank():
@@ -1849,13 +1847,30 @@ def main():
     return render_template('current.html',unique_code=unique_code, instock=instock, title='dashboard',form=form,total_claims=total_claims,
             current_time=current_time, greeting=greeting, message=message, users=users, challenges=challenges)
 
+
 @app.route('/adminlogin/<int:userid>', methods=['GET', 'POST'])
 def adminlogin(userid):
     user = Person.query.get_or_404(userid)
     login_user(user)
     return redirect(url_for("main"))
-    
 
+@app.route('/admindashboard', methods=['GET', 'POST'])
+@login_required
+def admindashboard():
+    item = Item.query.count()
+    return render_template('gvs/admindashboard.html', item=item)
+    
+@app.route('/adminprofile', methods=['GET', 'POST'])
+def adminprofile():
+    return render_template('gvs/adminprofile.html')
+    
+@app.route('/tablesdata', methods=['GET', 'POST'])
+def tablesdata():
+    return render_template('gvs/tables-data.html')
+    
+@app.route('/tablesgeneral', methods=['GET', 'POST'])
+def tablesgeneral():
+    return render_template('gvs/tables-general.html')
 
 @app.route('/allclients', methods=['GET', 'POST'])
 @login_required
@@ -2508,8 +2523,11 @@ def login():
         else:
             flash(f'Incorrect details, please try again', 'danger')
              
-    return render_template('login.html', form=form)
+    return render_template('gvs/pages-login.html', form=form)
+
  
+ 
+
 @app.route('/show', methods=['GET', 'POST'])
 def show():
     return render_template('show.html')
@@ -2545,10 +2563,10 @@ def signup():
                         name=form.name.data)
             db.session.add(user)
             db.session.commit()
-            send_email()
+            # send_email()
             # params = "New Account Created for " + new_user.username
             # sendtelegram(params)
-            flash("We sent you a confirmation Email, kindly confirm your email.", 'success')
+            flash("We will send you a confirmation Email, kindly confirm your email.", 'success')
            
             # user = Person.query.filter_by(email = form.email.data).first()
             login_user(user, remember=True)
@@ -2557,9 +2575,145 @@ def signup():
         print(form.errors)
    
             
-    return render_template('signup.html', form=form)
+    return render_template('gvs/pages-register.html', form=form)
+
+@app.route('/service', methods=['GET', 'POST'])
+def service():
+    return render_template('gvs/services.html')
+
+@app.route('/shipping', methods=['GET', 'POST'])
+def shipping():
+    return render_template('gvs/shipping.html')
 
 
+@app.route('/aboutgvsgroup', methods=['GET', 'POST'])
+def aboutgvsgroup():
+    return render_template('gvs/aboutgvsgroup.html')
+
+@app.route('/aboutgvs', methods=['GET', 'POST'])
+def aboutgvs():
+    return render_template('gvs/about.html')
+
+def calculate_charges(weight):
+    if weight < 1:
+        return 600.00
+    elif 1 <= weight <= 2:
+        return 1800.00
+    elif weight == 3:
+        return 1800.00
+    elif weight == 4:
+        return 2100.00
+    elif weight == 5:
+        return 3200.00
+    elif weight == 6:
+        return 3900.00
+    elif weight == 7:
+        return 4500.00
+    elif weight == 8:
+        return 5200.00
+    elif weight == 9:
+        return 5600.00
+    elif weight == 10:
+        return 6100.00
+    elif weight == 11:
+        return 6900.00
+    elif weight == 12:
+        return 7400.00
+    elif weight == 13:
+        return 8100.00
+    elif weight == 14:
+        return 9000.00
+    elif weight == 15:
+        return 9600.00
+    elif weight == 16:
+        return 10200.00
+    elif weight == 17:
+        return 11000.00
+    elif weight == 18:
+        return 11400.00
+    elif weight == 19:
+        return 12100.00
+    elif weight == 20:
+        return 12700.00
+    elif weight == 21:
+        return 13120.00
+    elif weight == 22:
+        return 13440.00
+    elif weight == 23:
+        return 13860.00
+    elif weight == 24:
+        return 14280.00
+    elif weight == 25:
+        return 14700.00
+    elif weight == 26:
+        return 15120.00
+    elif weight == 27:
+        return 15540.00
+    elif weight == 28:
+        return 15960.00
+    elif weight == 29:
+        return 16380.00
+    elif weight == 30:
+        return 16800.00
+    elif weight == 31:
+        return 17220.00
+    elif weight == 32:
+        return 17640.00
+    elif weight == 33:
+        return 18060.00
+    elif weight == 34:
+        return 18480.00
+    elif weight == 35:
+        return 18800.00
+    elif weight == 36:
+        return 19320.00
+    elif weight == 37:
+        return 19740.00
+    elif weight == 38:
+        return 20160.00
+    elif weight == 39:
+        return 20580.00
+    elif weight == 40:
+        return 21000.00
+    elif weight == 41:
+        return 21420.00
+    elif weight == 42:
+        return 21840.00
+    elif weight == 43:
+        return 22260.00
+    elif weight == 44:
+        return 22680.00
+    elif weight == 45:
+        return 23100.00
+    elif weight == 46:
+        return 23520.00
+    elif weight == 47:
+        return 23940.00
+    elif weight == 48:
+        return 24360.00
+    elif weight == 49:
+        return 24780.00
+    elif weight == 50:
+        return 25200.00
+    else:
+        return flash("Contact Customer Care for packages")
+
+@app.route('/calculate_charges', methods=['POST'])
+def calculate():
+    try:
+        weight = float(request.json['weight'])
+        if weight <= 0:
+            raise ValueError("Weight should be a positive number.")
+        charges = calculate_charges(weight)
+        if charges is not None:
+            return jsonify({'charges': charges})
+        else:
+            return jsonify({'error': 'Weight not in specified range.'}), 400
+    except ValueError as e:
+        return jsonify({'error': str(e)}), 400
+    
+    
+    
 def is_gmail_address(email):
     # Regular expression for a basic check of Gmail email address
     gmail_pattern = r'^[a-zA-Z0-9_.+-]+@gmail\.com$'
