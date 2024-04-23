@@ -1613,6 +1613,11 @@ def working():
         # users=User.query.order_by(User.id.desc()).all()
         return render_template("gvs/index.html")
     
+@app.route('/mainindex', methods=['GET', 'POST'])
+def mainindex():
+        # users=User.query.order_by(User.id.desc()).all()
+        return render_template("gvs/gvsindex.html")
+    
     
 
 @app.route('/thank', methods=['GET', 'POST'])
@@ -2969,6 +2974,6 @@ def method_name():
 
 if __name__ == '__main__':
     #DEBUG is SET to TRUE. CHANGE FOR PROD
-    app.run(host='0.0.0.0', port=4000, debug=True)
+    app.run(host='0.0.0.0', port=8000, debug=True)
     
   
