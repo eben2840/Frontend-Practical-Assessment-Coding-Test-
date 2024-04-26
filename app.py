@@ -1608,10 +1608,11 @@ def homme():
         return render_template("index1.html")
 
 
+
 @app.route('/', methods=['GET', 'POST'])
 def working():
         # users=User.query.order_by(User.id.desc()).all()
-        return render_template("gvs/index.html")
+        return render_template("gvs/gvsindex.html")
     
 @app.route('/mainindex', methods=['GET', 'POST'])
 def mainindex():
