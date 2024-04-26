@@ -1,9 +1,75 @@
 
-{% extends 'base.html' %}
+{% extends 'gvs/gvsbase.html' %}
 
 {% block body %}
    
    
+<section class="bg-1100">
+  <div class="container">
+    <div class="row py-8 py-md-10 py-lg-11">
+      <div class="col-lg-6">
+        <div class="row justify-content-center justify-content-lg-start">
+          <div class="col-md-8 col-lg-12 col-xl-11">
+            <h2 class="text-white fs-4 fs-lg-3 lh-sm mb-2 text-center text-lg-start fw-bold">Welcome to GVSGROUP Packaging & Courier Services!</h2>
+            <p class="fs-8 text-white text-opacity-65 mb-4 mb-md-6 mb-lg-7 lh-lg mb-6 mb-lg-7 text-center text-lg-start">Learn how our shipping works</p>
+          </div>
+          <div class="col-lg-10">
+            <div class="d-flex gap-2 gap-lg-x1 mb-4 mb-lg-5">
+              <div>
+                <div class="check-icon bg-success mb-1 rounded-circle d-flex align-items-center justify-content-center"> <span class="uil uil-check text-white"></span></div>
+              </div>
+              <div>
+                <h5 class="fs-8 fw-bold lh-lg mb-1 text-white">24/7 Hour Support</h5>
+                <p class="lh-xl text-white text-opacity-70 mb-0">Get support from our efficient customer support team, 24/7, all year round.</p>
+              </div>
+            </div>
+            <div class="d-flex gap-2 gap-lg-x1 mb-4 mb-lg-5">
+              <div class="d-flex justify-content-center justify-content-lg-start"><a class="btn btn-primary btn-lg lh-xl mb-4 mb-md-5 mb-lg-7" href="#!">Support Team</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="accordion mt-lg-4 ps-3 pe-x1 bg-white" id="accordion">
+            <h1 class="accordion-header" id="heading1"><button class="accordion-button fs-5 lh-lg fw-bold pt-x1 pb-2 " type="button"  aria-expand="true"  data-accordion-button="">How It Works</button></h1>
+            
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading1"><button class="accordion-button fs-8 lh-lg fw-bold pt-x1 pb-2 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expand="true" aria-controls="collapse1" data-accordion-button="data-accordion-button">First</button></h2>
+            <div class="accordion-collapse collapse show" id="collapse1" data-bs-parent="#accordion">
+              <div class="accordion-body lh-xl pt-0 pb-x1">In order to register, we require a valid email address and phone number as well as your address.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading2"><button class="accordion-button fs-8 lh-lg fw-bold pt-x1 pb-2 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expand="false" aria-controls="collapse2" data-accordion-button="data-accordion-button">Second</button></h2>
+            <div class="accordion-collapse collapse" id="collapse2" data-bs-parent="#accordion">
+              <div class="accordion-body lh-xl pt-0 pb-x1">Once registered we will email you your mailbox address in the US and you can immediately begin shipping your items.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading3"><button class="accordion-button fs-8 lh-lg fw-bold pt-x1 pb-2 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expand="false" aria-controls="collapse3" data-accordion-button="data-accordion-button">Third</button></h2>
+            <div class="accordion-collapse collapse" id="collapse3" data-bs-parent="#accordion">
+              <div class="accordion-body lh-xl pt-0 pb-x1">As you order items, you can enter them in our package management system so that we can know what to expect, if not, we will perform updates as the packages are delivered.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading4"><button class="accordion-button fs-8 lh-lg fw-bold pt-x1 pb-2 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expand="false" aria-controls="collapse4" data-accordion-button="data-accordion-button">Fourth</button></h2>
+            <div class="accordion-collapse collapse" id="collapse4" data-bs-parent="#accordion">
+              <div class="accordion-body lh-xl pt-0 pb-x1">Once packages are delivered to us in the US, we will arrange shipment to Guyana and notify you by email.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading5"><button class="accordion-button fs-8 lh-lg fw-bold pt-x1 pb-2 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expand="false" aria-controls="collapse5" data-accordion-button="data-accordion-button">Lastly</button></h2>
+            <div class="accordion-collapse collapse" id="collapse5" data-bs-parent="#accordion">
+              <div class="accordion-body lh-xl pt-0 pb-x1">Delivery can then be arranged by responding to the email or by phone.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
    <!-- ======= Breadcrumbs ======= -
     <div class="breadcrumbs d-flex align-items-center" style="background-image: url('static/assets/img/about-header.jpg');">
       <div class="container position-relative d-flex flex-column align-items-center">
@@ -45,78 +111,7 @@
 
       </div>
 -->
-      <section  class="call-to-action " class="breadcrumbs d-flex align-items-center" style="background-color: #0b28b9;">
-        <div class="container" data-aos="fade-up">
-          <div class="row justify-content-center">
-            <div class="col-lg-6 text-center">
-              <h3 style="font-size:50px;">How it Works</h3>
-              <a class="cta-btn" href="#">Learn how our shipping works</a>
-            </div>
-          </div>
-  
-        </div>
-      </section>
-
-      <div class="bod">
-
-        <div class="timeline">
-          <ul>
-            <li data-aos="fade-right">
-              <div class="content">
-              <h2 style="font-size:25px; color:#0b28b9;"><b>First <i class="bi bi-check-circle-fill"></i> </b></h2>
-              <p>
-                In order to register, we require a valid email address and phone number as well as your address.
-              </p>
-              </div>
-            </li>
-
-            <li data-aos="fade-right">
-              <div class="content">
-              <h2 style="font-size:25px; color:#0b28b9;"><b> <i class="bi bi-check-circle-fill"></i> Second</b></h2>
-              <p>
-                
-      Once registered we will email you your mailbox address in the US and you can immediately begin shipping your items.
-              </p>
-              </div>
-            </li>
-
-            <li data-aos="fade-left">
-              
-              <div class="content">
-              <h2 style="font-size:25px; color:#0b28b9;"><b>Third <i class="bi bi-check-circle-fill"></i></b></h2>
-              <p>
-                As you order items, you can enter them in our package management system so that we can know what to expect, if not, we will perform updates as the packages are delivered.
-              </p>
-              </div>
-            </li>
-
-
-            <li data-aos="fade-right">
-              
-              <div class="content">
-              <h2 style="font-size:25px; color:#0b28b9;"><b> <i class="bi bi-check-circle-fill"></i> Fourth</b></h2>
-              <p>
-                Once packages are delivered to us in the US, we will arrange shipment to Guyana and notify you by email.
-              </p>
-              </div>
-            </li>
-        
-
-            <li data-aos="fade-left" >
-              
-              <div class="content">
-              <h2 style="font-size:25px; color:#0b28b9;"><b>Fifth <i class="bi bi-check-circle-fill"></i> </b></h2>
-              <p>
-                Delivery can then be arranged by responding to the email or by phone.
-              </p>
-              </div>
-            </li>
-          </ul>
-        </div>
-        
-      </div>
-          
-
+    
       
  
 

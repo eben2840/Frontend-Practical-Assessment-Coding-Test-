@@ -1620,6 +1620,12 @@ def mainindex():
         return render_template("gvs/gvsindex.html")
     
     
+@app.route('/gvsservice', methods=['GET', 'POST'])
+def gvsservice():
+        # users=User.query.order_by(User..desc()).all()
+        return render_template("gvs/gvsservice.html")
+    
+    
 
 @app.route('/thank', methods=['GET', 'POST'])
 def thank():
@@ -2587,6 +2593,10 @@ def signup():
 def service():
     return render_template('gvs/services.html')
 
+@app.route('/rate', methods=['GET', 'POST'])
+def rate():
+    return render_template('gvs/gvsrate.html')
+
 @app.route('/shipping', methods=['GET', 'POST'])
 def shipping():
     return render_template('gvs/shipping.html')
@@ -2595,6 +2605,8 @@ def shipping():
 @app.route('/aboutgvsgroup', methods=['GET', 'POST'])
 def aboutgvsgroup():
     return render_template('gvs/aboutgvsgroup.html')
+
+
 
 @app.route('/aboutgvs', methods=['GET', 'POST'])
 def aboutgvs():
