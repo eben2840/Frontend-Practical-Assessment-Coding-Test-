@@ -126,6 +126,40 @@
               </div>
             </div>
           </section> -->
+          <section class="bg-300 position-relative z-0" >
+            <div class="container py-8 py-lg-9">
+              <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-8">
+                  <div class="row justify-content-center">
+                    <div class="col-12 col-lg-10">
+                      <h2 class="fs-4 fs-lg-3 fw-bold text-center mb-2 lh-sm">Enter package weight(lbs) here:
+                      </h2>
+                      <p class="fs-8 mb-5 text-center lh-lg fw-normal"> **Rates are strictly for shipping to Guyana. When invoices are generated, taxes and additional charges are added together as 'local charges'. Estimates of local taxes can be seen here.</p>
+                    </div>
+                    <div class="col-12 col-lg-10">
+                      <form action="" id="packageForm" method="post" role="form" class=" " style=" background-color:#f7f9fc; border-radius: 10px; "> 
+                        
+                        <div class="mb-2 w-100">
+                          <input class="form-control email-input" type="number" id="weight" name="weight" step="0.01" required class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="Eg. 2" />
+                        </div>
+                       
+                        <div class="d-grid">
+                          <button class="btn btn-lg btn-primary lh-xl mb-x1" type="submit">Calculate Charges</button></div>
+                      </div>
+
+                      <div class="my-3">
+                        <div class="sent-message bg-dark-subtle p-3 text-center text-white fs-5 " id="result">Shipping Charges:</div>
+                      </div>
+          
+                      <!--<div id="result"></div>-->
+                      </form>
+                    </div>
+                   
+                   
+                </div>
+              </div>
+            </div>
+            </section>
           <section class="container mb-5  mt-5 mb-lg-13" id="about">
             <div class="row align-items-center">
               <div class="col-12 col-lg-6 col-xl-7"><img class="img-fluid" src="static/gvs/assets/img/Hero/Team.webp" alt="" /></div>
@@ -311,7 +345,7 @@
           <div class="container">
             <div class="row justify-content-center">
               <div class="col-12">
-                <div class="position-relative z-1 text-center mb-8 mb-lg-9 video-player-paused" data-video-player-container="data-video-player-container"><video class="w-100 h-100 rounded-4" src="static/gvs/assets/video/Tech_video.mp4" poster="https://img.freepik.com/free-photo/online-shopping-happy-african-american-man-beanie-laughing-showing-credit-card-mobile-phone-screen-standing-pink-background_1258-78467.jpg?t=st=1714088016~exp=1714091616~hmac=b32c958e0afd58c716384b6a6c6cc4e3edd9b13304687780c904e02426352c96&w=996" type="video/mp4" data-video-player="data-video-player"></video>
+                <div class="position-relative z-1 text-center mb-8 mb-lg-9 video-player-paused" data-video-player-container="data-video-player-container"><video class="w-100 h-100 rounded-4" src="static/gvs/assets/video/Tech_video.mp4" poster="https://media.istockphoto.com/id/1371131840/photo/mature-man-using-digital-tablet-at-home.jpg?s=612x612&w=0&k=20&c=ubadj_8mev4kTYQY7PJgbSznJP8VwKrwtnaiLfYu0u4=" type="video/mp4" data-video-player="data-video-player"></video>
                   <div class="overlay position-absolute top-0 bottom-0 start-0 end-0 rounded-4 bg-1100 object-cover" data-overlay="data-overlay"> </div><button class="btn play-button position-absolute justify-content-center align-items-center bg-white rounded-circle cursor-pointer" data-play-button="data-play-button"> <img class="play-icon w-25" src="static/gvs/assets/img/illustrations/play-solid.svg" alt="" data-play-icon="data-play-icon" /><img class="pause-icon w-25" src="static/gvs/assets/img/illustrations/pause-solid.svg" alt="" data-pause-icon="data-pause-icon" /></button>
                   <div class="position-absolute dots d-none d-sm-block"><img class="img-fluid w-100" src="static/gvs/assets/img/illustrations/Dots.webp" alt="" /></div>
                 </div>
@@ -555,40 +589,8 @@
               </div>
             </div>
           </section>
-          <section class="bg-300 position-relative z-0" >
-            <div class="container py-8 py-lg-9">
-              <div class="row justify-content-center">
-                <div class="col-md-8 col-lg-8">
-                  <div class="row justify-content-center">
-                    <div class="col-12 col-lg-10">
-                      <h2 class="fs-4 fs-lg-3 fw-bold text-center mb-2 lh-sm">Enter package weight(lbs) here:
-                      </h2>
-                      <p class="fs-8 mb-5 text-center lh-lg fw-normal"> **Rates are strictly for shipping to Guyana. When invoices are generated, taxes and additional charges are added together as 'local charges'. Estimates of local taxes can be seen here.</p>
-                    </div>
-                    <div class="col-12 col-lg-10">
-                      <form action="" id="packageForm" method="post" role="form" class=" " style=" background-color:#f7f9fc; border-radius: 10px; "> 
-                        
-                        <div class="mb-2 w-100">
-                          <input class="form-control email-input" type="number" id="weight" name="weight" step="0.01" required class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="Eg. 2" />
-                        </div>
-                       
-                        <div class="d-grid">
-                          <button class="btn btn-lg btn-primary lh-xl mb-x1" type="submit">Calculate Charges</button></div>
-                      </div>
-
-                      <div class="my-3">
-                        <div class="sent-message bg-dark-subtle p-3 text-center text-white fs-5 " id="result">Shipping Charges: $12.89</div>
-                      </div>
           
-                      <!--<div id="result"></div>-->
-                      </form>
-                    </div>
-                   
-                   
-                </div>
-              </div>
-            </div>
-            </section>
+          
         </div>
 
 
@@ -637,11 +639,13 @@
                 
                   <p class="mb-2 lh-lg"> Contact Us</p>
                   <ul class="list-unstyled text-1100">
-                    <li class="mb-1"> <a class="ls-1 lh-xl" href="#!">+5926996349 / +5926766323 / +14707469722</a></li>
+                    <li class="mb-1"> <a class="ls-1 lh-xl" href="#!">+5926996349 /<br> +5926766323 /<br> +14707469722</a></li>
                     <li class="mb-1"> <a class="ls-1 lh-xl" href="#!"> 
                     
-                      GBHgroupBusiness@gmail.com</a></li>
-                    <li class="mb-1"> <a class="ls-1 lh-xl" href="#!">   thegvsgroup@gmail.com</a></li>
+                   </a>
+                    </li>
+                     
+                    <li class="mb-1"> <a class="ls-1 lh-xl" href="#!">  </a></li>
                   </ul>
                 </div>
               </div>
