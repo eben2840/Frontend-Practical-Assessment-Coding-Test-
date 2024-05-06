@@ -2618,6 +2618,62 @@ def aboutgvsgroup():
 
 
 
+@app.route('/localrate', methods=['GET', 'POST'])
+def localrate():
+    return render_template('gvs/gvslocalrate.html')
+
+# Dictionary containing duty and VAT rates for items
+items_rates = {
+    "Album": {"duty_rate": 20, "vat_rate": 14},
+    "All clothing": {"duty_rate": 20, "vat_rate": 14},
+    "Appliances": {"duty_rate": 20, "vat_rate": 14},
+    "Car Parts": {"duty_rate": 30, "vat_rate": 14},
+    "Cellular Phones": {"duty_rate": 0, "vat_rate": 0},
+    "Cosmetics": {"duty_rate": 20, "vat_rate": 14},
+    "Costume Jewelry": {"duty_rate": 60, "vat_rate": 14},
+    "Digital Cameras": {"duty_rate": 25, "vat_rate": 14},
+    "DVDs": {"duty_rate": 30, "vat_rate": 14},
+    "Electronics": {"duty_rate": 20, "vat_rate": 14},
+    "Furniture": {"duty_rate": 20, "vat_rate": 14},
+    "IPods/Musical Storage Devices": {"duty_rate": 20, "vat_rate": 14},
+    "Jewelry": {"duty_rate": 50, "vat_rate": 14},
+    "Musial Equipment": {"duty_rate": 10, "vat_rate": 14},
+    "Shoes": {"duty_rate": 20, "vat_rate": 14},
+    "Speakers": {"duty_rate": 20, "vat_rate": 14},
+    "Toys": {"duty_rate": 20, "vat_rate": 14},
+    "Video Games": {"duty_rate": 20, "vat_rate": 14},
+    "Vitamins & Food Supplements": {"duty_rate": 20, "vat_rate": 14},
+    "Watches": {"duty_rate": 50, "vat_rate": 14},
+    "3-in-1 Machines": {"duty_rate": 0, "vat_rate": 14},
+    "Blank DVDs & CDs": {"duty_rate": 5, "vat_rate": 14},
+    "Books": {"duty_rate": 0, "vat_rate": 0},
+    "CD ROM (Software)": {"duty_rate": 45, "vat_rate": 14},
+    "CDs (Music)": {"duty_rate": 45, "vat_rate": 14},
+    "Computer Monitors": {"duty_rate": 0, "vat_rate": 0},
+    "Computer Parts": {"duty_rate": 0, "vat_rate": 14},
+    "Computer Systems": {"duty_rate": 0, "vat_rate": 0},
+    "Ethernet Hub": {"duty_rate": 0, "vat_rate": 0},
+    "Fax and Line Modems": {"duty_rate": 0, "vat_rate": 0},
+    "Handheld tools": {"duty_rate": 5, "vat_rate": 14},
+    "Ink Cartridges": {"duty_rate": 5, "vat_rate": 14},
+    "Laptops": {"duty_rate": 0, "vat_rate": 0},
+    "Motherboards": {"duty_rate": 0, "vat_rate": 0},
+    "Plumbing": {"duty_rate": 15, "vat_rate": 14},
+    "Printers (Computer)": {"duty_rate": 5, "vat_rate": 0},
+    "Printer Cartridge": {"duty_rate": 3, "vat_rate": 14},
+    "Processors": {"duty_rate": 0, "vat_rate": 0},
+    "Televisions": {"duty_rate": 20, "vat_rate": 14}
+}
+
+@app.route('/get_rates', methods=['POST'])
+def get_rates():
+    item = request.form['item']
+    if item in items_rates:
+        rates = items_rates[item]
+        return render_template('gvs/gvslocalrate.html', item=item, rates=rates)
+    else:
+        return render_template('gvs/gvslocalrate.html', error="Item not found")
+
 @app.route('/aboutgvs', methods=['GET', 'POST'])
 def aboutgvs():
     return render_template('gvs/about.html')
