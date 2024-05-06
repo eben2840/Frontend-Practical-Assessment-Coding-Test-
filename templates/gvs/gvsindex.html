@@ -67,12 +67,16 @@
           <section class="bg-300 position-relative z-0" >
             <div class="container py-8 py-lg-9">
               <div class="row justify-content-center">
-                <div class="col-md-8 col-lg-8">
+                <div class="col-12 col-lg-6 col-xl-5">
+                  <img src="static/assets/img/a.jpg" style="width:100%; height:400px; object-fit:cover; border-radius:20px;">
+  
+                  </div>
+                <div class="col-md-6 col-lg-6">
                   <div class="row justify-content-center">
                     <div class="col-12 col-lg-10">
-                      <h2 class="fs-4 fs-lg-3 fw-bold text-center mb-2 lh-sm">Enter package weight(lbs) here:
+                      <h2 class="fs-4 fs-lg-3 fw-bold text-left mb-2 lh-sm">Enter package weight(lbs) here:
                       </h2>
-                      <p class="fs-8 mb-5 text-center lh-lg fw-normal"> **Rates are strictly for shipping to Guyana. When invoices are generated, taxes and additional charges are added together as 'local charges'. Estimates of local taxes can be seen here.</p>
+                      <p class="fs-20 mb-5 text-left lh-lg fw-normal"> **Rates are strictly for shipping to Guyana. When invoices are generated, taxes and additional charges are added together as 'local charges'. Estimates of local taxes can be seen <a href="/localrate" style="color:blue;">here</a>.</p>
                     </div>
                     <div class="col-12 col-lg-10">
                       <form action="" id="packageForm" method="post" role="form" class=" " style=" background-color:#f7f9fc; border-radius: 10px; "> 
@@ -85,15 +89,16 @@
                           <button class="btn btn-lg btn-primary lh-xl mb-x1" type="submit">Calculate Charges</button></div>
                       </div>
 
-                      <div class="my-3">
-                        <div class="sent-message bg-dark-subtle p-3 text-center text-white fs-5 " id="result">Shipping Charges:</div>
-                      </div>
           
                       <!--<div id="result"></div>-->
                       </form>
                     </div>
                    
                    
+                </div>
+                
+                <div class="my-3">
+                  <div class="sent-message bg-dark-subtle p-3 text-center text-white fs-5 " id="result">Shipping Charges:</div>
                 </div>
               </div>
             </div>
