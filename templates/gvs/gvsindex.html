@@ -10,13 +10,29 @@
                 data-aos-offset="300"
                 data-aos-easing="ease-in-sine">
                   <div class="col-lg-6 text-center text-lg-start">
+                    {% with messages = get_flashed_messages() %}
+{% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success mb-3 p-2" role="alert">
+        {{ message }} 
+    </div>
+    
+    {% endfor %}
+{% endif %}
+{% endwith %}
                     <h2 class="fs-4 fs-lg-3 text-white fw-bold mb-2 mb-lg-x1 lh-base mt-3 mt-lg-0">#1 Online Ordering Platform - With Over 1000+ Users<span class="text-nowrap"></span></h2 >
                     <p class="fs-8 text-white mb-3 mb-lg-4 lh-lg">With lots of unique blocks, Fast and Reliable courier service between the US and Guyana.</p>
                     
-                    <div class="d-flex justify-content-center justify-content-lg-start"><a class="btn btn-primary btn-lg lh-xl mb-4 mb-md-5 mb-lg-7" href="/signup">Register!</a></div>
-                    <!-- <p class="mb-x1 fs-10 button-text text-uppercase fw-bold lh-base text-300">Download our app</p> -->
+
+                    <div class="d-flex gap-2 gap-lg-x1 mb-4 mb-lg-5">
+                      <div class="justify-content-center justify-content-lg-start"><a class="btn btn-primary btn-lg lh-xl mb-4 mb-md-5 mb-lg-7" href="/signup">Register!</a></div>
+                      <div class="justify-content-center justify-content-lg-start"><a class="btn btn-primary btn-lg lh-xl mb-4 mb-md-5 mb-lg-7" href="/supportteam">Support! </a></div>
+                     
+                    </div>
+                     <!-- <p class="mb-x1 fs-10 button-text text-uppercase fw-bold lh-base text-300">Download our app</p> -->
                     <!-- <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-2 position-relative z-2"><a class="border-0 p-0 bg-transparent cursor-pointer rounded-1" href="#!"> <img class="img-fluid" src="static/gvs/assets/img/logos/App_Store.webp" alt="static/gvs/assets/img/logos/App_Store.webp" /></a><a class="border-0 p-0 bg-transparent cursor-pointer rounded-1" href="#!"> <img class="img-fluid" src="static/gvs/assets/img/logos/Play_Store.webp" alt="static/gvs/assets/img/logos/Play_Store.webp" /></a></div> -->
                   </div>
+                  
                   <div class="col-lg-6 position-lg-relative" data-aos="fade-right"
                   data-aos-offset="300"
                   data-aos-easing="ease-in-sine">
@@ -132,6 +148,10 @@
                         <h5 class="fs-8 fw-bold lh-lg mb-1 text-white">24/7 Hour Support</h5>
                         <p class="lh-xl text-white text-opacity-70 mb-0">Get support from our efficient customer support team, 24/7, all year round.</p>
                       </div>
+                      
+                    </div>
+                    <div class="d-flex gap-2 gap-lg-x1 mb-4 mb-lg-5">
+                      <div class="d-flex justify-content-center justify-content-lg-start"><a class="btn btn-primary btn-lg lh-xl mb-4 mb-md-5 mb-lg-7" href="/supportteam">Support Team</a></div>
                     </div>
 
                     <!--<div class="col-lg-10">
@@ -502,7 +522,7 @@
                         </div>
                       </div>
                       <div class="d-flex gap-2 gap-lg-x1 mb-4 mb-lg-5">
-                        <div class="d-flex justify-content-center justify-content-lg-start"><a class="btn btn-primary btn-lg lh-xl mb-4 mb-md-5 mb-lg-7" href="#!">Support Team</a></div>
+                        <div class="d-flex justify-content-center justify-content-lg-start"><a class="btn btn-primary btn-lg lh-xl mb-4 mb-md-5 mb-lg-7" href="/supportteam">Support Team</a></div>
                       </div>
                     </div>
                   </div>

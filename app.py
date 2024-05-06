@@ -121,6 +121,16 @@ class Budget(db.Model):
         return f"Studenthalls('{self.id}', {self.budget}', {self.start_date})"
 
 
+class Supportteam(db.Model):
+    id= db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String())
+    number = db.Column(db.String())
+    email = db.Column(db.String())
+    message = db.Column(db.String())
+    def __repr__(self):
+        return f"Studenthalls('{self.id}', {self.name}')"
+
+
 class Logger(db.Model):
     id= db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Date)  # Add start_date field
@@ -2611,6 +2621,31 @@ def aboutgvsgroup():
 @app.route('/aboutgvs', methods=['GET', 'POST'])
 def aboutgvs():
     return render_template('gvs/about.html')
+
+@app.route('/supportteam', methods=['GET', 'POST'])
+def supportteam():
+    
+    form=WaitForm()
+    print("form submitted:", form.validate_on_submit())
+    if form.validate_on_submit():
+        print("form valid")
+        support=Supportteam(
+            email=form.email.data,
+            name=form.name.data,
+            message=form.message.data,
+            number=form.number.data
+            )
+        db.session.add(support)
+        db.session.commit()
+        print("support created:", support)
+        print("form email:", form.email.data)
+        
+        flash("Our Support Team will contact you shortly.")
+        return redirect('/')
+    print("form errors:", form.errors)
+    
+    return render_template('gvs/supportteam.html', form=form)
+
 
 def calculate_charges(weight):
     if weight < 1:

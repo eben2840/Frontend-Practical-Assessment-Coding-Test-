@@ -35,6 +35,9 @@ class Adduser(FlaskForm):
     
 class WaitForm(FlaskForm):
     email = StringField('email', validators=[DataRequired()])
+    name = StringField('name', validators=[DataRequired()])
+    number = StringField('number', validators=[DataRequired()])
+    message = StringField('message', validators=[DataRequired()])
     submit = SubmitField('Submit')
     
     

@@ -1,0 +1,109 @@
+
+{% extends 'gvs/gvsbase.html' %}
+
+{% block body %}
+   
+   
+<section class="bg-1100">
+  <div class="container">
+    <div class="row py-8 py-md-10 py-lg-11">
+      <div class="col-lg-6">
+        <div class="row justify-content-center justify-content-lg-start">
+          <div class="col-md-8 col-lg-12 col-xl-11">
+            <h2 class="text-white fs-5 fs-lg-3 mt-5 lh-sm text-center text-lg-start fw-bold">Send Us A Message.</h2>
+            <p class="fs-8 text-white text-opacity-65 lh-lg  text-center text-lg-start">To better assist you, leave a message and the team will suport within 24 hours. You can also visit our Help Center for additional information.
+              Let us know by providing the necessary information below. Then, tap or click "Submit" to contact us.
+             </p>
+          </div>
+          <div class="col-lg-10">
+            
+            <img src="static/gvs/assets/img/Hero/Team.webp" style="width:100%;">
+           
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="accordion mt-lg-4 ps-3 pe-x1 bg-white" id="accordion">
+            <h1 class="accordion-header" id="heading1"><button class="accordion-button fs-5 lh-lg fw-bold pt-x1 pb-2 " type="button"  aria-expand="true"  data-accordion-button="">Support Team</button></h1>
+        
+            <form action="" method="post">
+              {{form.hidden_tag()}}
+          <label class for="">Enter Name</label>
+          {{form.name(class="input-field",style="padding:15px;  border:1px solid #2E2D7F;   border-radius:15px; width:100%;box-shadow: var(--shadow-1);"  ,id="floatingInput",placeholder="eg. Joe Doe")}}
+
+
+            <label class="pt-2" for="">Enter Mobile Number</label>
+            {{form.number(class="input-field",style="padding:15px;  border:1px solid #2E2D7F;   border-radius:15px; width:100%;box-shadow: var(--shadow-1);"  ,id="floatingInput",placeholder="eg. Joe Doe")}}
+
+              
+              <label class="pt-2" for="">Enter Email</label>
+              {{form.email(class="input-field",style="padding:15px;  border:1px solid #2E2D7F;   border-radius:15px; width:100%;box-shadow: var(--shadow-1);"  ,id="floatingInput",placeholder="eg. Joe Doe")}}
+
+                
+                <label class="pt-2" for="">Type Message</label>
+               
+                  <textarea class="input-group " name="message" id="" style="padding:15px;  border:1px solid #2E2D7F;   border-radius:15px; width:100%;box-shadow: var(--shadow-1);"  placeholder=" Type you Message..." rows="3"></textarea>
+            
+
+
+                 
+                  <div class="d-flex gap-2 gap-lg-x1 mb-2 mt-2 mb-lg-5">
+                    <button class="btn btn-primary btn-lg lh-xl mb-4 mb-md-5 mb-lg-7"  type="submit">submit</button>
+                    
+                  </div>
+      </form>
+         
+        
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+   <!-- ======= Breadcrumbs ======= -
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('static/assets/img/about-header.jpg');">
+      <div class="container position-relative d-flex flex-column align-items-center">
+
+        <h2>Welcome to GSV GROUP<br> Packaging & Courier Services!</h2>
+        <ol>
+          <li><a href=""></a></li>
+          <button type="submit" style="background-color: red;  border:none; color:#fff; width:300px; border-radius:20px; padding:10px;">Learn how our shipping works</button></div>
+            
+        </ol>
+
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= About Section ======= -->
+
+      
+      <!--<div class="container" data-aos="fade-up">
+
+        <div class="row gy-4" data-aos="fade-up">
+          <div class="col-lg-4">
+            <img src="static/assets/img/about.jpg" class="img-fluid" alt="">
+          </div>
+          <div class="col-lg-8">
+            <div class="content ps-lg-5">
+              <h3>Who Are We?
+                </h3>
+              <p>
+                At GVS Group we aim to provide quality services for the modern Consumer & Business. Our goal is to be the Number One provider in Shipping, Transport, Travel, Tourism, and Preferred choice by consumers in Guyana and throughout the Caribbean.
+              </p>
+              <ul>
+                <li><i class="bi bi-check-circle-fill"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
+                <li><i class="bi bi-check-circle-fill"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
+                <li><i class="bi bi-check-circle-fill"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+-->
+    
+      
+ 
+
+    {%endblock body%}
