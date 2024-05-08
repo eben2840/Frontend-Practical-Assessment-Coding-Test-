@@ -2674,9 +2674,19 @@ def get_rates():
     else:
         return render_template('gvs/gvslocalrate.html', error="Item not found")
 
+
 @app.route('/aboutgvs', methods=['GET', 'POST'])
 def aboutgvs():
     return render_template('gvs/about.html')
+
+
+@app.route('/terms_conditions', methods=['GET', 'POST'])
+def terms_conditions():
+    return render_template('gvs/terms.html')
+
+@app.route('/privacy_policy', methods=['GET', 'POST'])
+def privacy_policy():
+    return render_template('gvs/policy.html')
 
 @app.route('/supportteam', methods=['GET', 'POST'])
 def supportteam():
