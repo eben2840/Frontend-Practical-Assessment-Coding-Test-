@@ -76,9 +76,8 @@ def load_user(user_id):
 
 
 
-
 def sendtelegram(params):
-    url = "https://api.telegram.org/bot7174034710:AAGMITwp6BvnS6JPO-j2ulYiP3VOgK43LzE/sendMessage?chat_id=-4165806132&text=" + urllib.parse.quote(params)
+    url = "https://api.telegram.org/bot7185046883:AAGUthAY5SQBieDuNiSlqDBAPMr881HA8no/sendMessage?chat_id=-4284608316&text=" + urllib.parse.quote(params)
     content = urllib.request.urlopen(url).read()
     print(content)
     return content
@@ -2703,10 +2702,18 @@ def supportteam():
             )
         db.session.add(support)
         db.session.commit()
+        sendtelegram("New Support Request GVSGROUP" + '\n' + 
+                     "" + '\n' +
+                      "Name = " + support.name  + '\n' + 
+                    #   "Date = " + support.date  + '\n' + 
+                      "Time = " + support.email  + '\n' + 
+                      "Incident = " + support.number  + '\n' + 
+                      "Description = " + support.message  
+                    )  
         print("support created:", support)
         print("form email:", form.email.data)
         
-        flash("Our Support Team will contact you shortly.")
+        flash("Thanks, Our Support Team will contact you shortly.")
         return redirect('/')
     print("form errors:", form.errors)
     
