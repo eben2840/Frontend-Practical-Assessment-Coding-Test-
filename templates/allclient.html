@@ -1,7 +1,6 @@
-{% extends 'landingpage.html' %}
+{% extends 'gvs/dashlayout.html' %}
 
 {% block body %}
-
 
 
     
@@ -40,14 +39,14 @@
     
           <div class="card shadow border-0 mb-7 ">
             <div class="card-header d-flex " style="justify-content:space-between;">
-                <h5 class="mb-0">All Clients</h5>
+                <h5 class="mb-0">All GVS Users</h5>
             </div>
             <div class="table-responsive">
                 <table class="table table-hover table-nowrap">
                     <thead class="thead-light">
                         <tr>
-                            <th scope="col">Client ID</th>
-                            <th scope="col">Client Name</th>
+                            <th scope="col">User ID</th>
+                            <th scope="col">User Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Code</th>
                             <th scope="col">Contact</th>
@@ -75,9 +74,7 @@
                                 {{users.email}}
                             
                             
-                                <!--<span class="badge badge-lg badge-dot">
-                                    {{users.tag}}
-                                </span>-->
+                              
                             </td>
     
                             <td>
@@ -106,9 +103,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="card-footer border-0 py-5">
-                <span class="text-muted text-sm">Showing 10 items per page</span>
-            </div>
+            
         </div>
       
      

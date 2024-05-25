@@ -26,7 +26,7 @@
           <div class="row">
 
             <!-- Sales Card -->
-            <div class="col-xxl-6 col-md-6">
+            <div class="col-xxl-4 col-md-6">
               <div class="card info-card sales-card">
 
                 <div class="filter">
@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Total Item<span></span></h5>
+                  <h5 class="card-title">Total Items<span></span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -60,9 +60,7 @@
               </div>
             </div>
             <!-- End Sales Card -->
-
-            <!-- Revenue Card -->
-            <div class="col-xxl-6 col-md-6">
+            <div class="col-xxl-4 col-md-6">
               <div class="card info-card revenue-card">
 
                 <div class="filter">
@@ -79,22 +77,154 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Total Cost</h5>
+                  <h5 class="card-title">Total Categories</h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-currency-dollar"></i>
+                      <i class="bi bi-plus"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>$3,264</h6>
-                      <!--<span class="text-success small pt-1 fw-bold">8%</span> 
--->
+                      <h6>{{group}}</h6>
                     </div>
                   </div>
                 </div>
 
               </div>
-            </div><!-- End Revenue Card -->
+            </div>
+
+            {% if current_user.role=='admin'%}
+            
+            <!--nect-->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card revenue-card">
+
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </ul>
+                </div>
+
+                <div class="card-body">
+                  <h5 class="card-title">Total Pending Orders</h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-plus"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>{{pending_category}}</h6>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <!--next-->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card revenue-card">
+
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </ul>
+                </div>
+
+                <div class="card-body">
+                  <h5 class="card-title">Total Denied Orders</h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-plus"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>{{denied_category}}</h6>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card revenue-card">
+
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </ul>
+                </div>
+
+                <div class="card-body">
+                  <h5 class="card-title">Total Progress Orders</h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-plus"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>{{progress_category}}</h6>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            {% endif%}
+            
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card revenue-card">
+
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </ul>
+                </div>
+
+                <div class="card-body">
+                  <h5 class="card-title">Total Completed Orders</h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-plus"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>{{completed_category}}</h6>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            
+
+            
 
             <!-- Customers Card 
             <div class="col-xxl-4 col-xl-12">
@@ -133,7 +263,8 @@
 
             </div><!-- End Customers Card -->
 
-           
+
+
             <!-- Recent Sales -->
             <div class="col-12">
               <div class="card recent-sales overflow-auto">
@@ -157,56 +288,60 @@
                   <table class="table table-borderless datatable">
                     <thead>
                       <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Customer</th>
-                        <th scope="col">Product</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Status</th>
+                        <th scope="col">Customer ID</th>
+                        <th scope="col">Item ID</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Receiver's Name </th>
+                        <th scope="col">Date ordered</th>
+                        <th scope="col">Phone Number</th>
+                        <th scope="col">Unit</th>
+                        <th scope="col">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
+                      {%for users in users%}
                       <tr>
-                        <th scope="row"><a href="#">#2457</a></th>
-                        <td>Brandon Jacob</td>
-                        <td><a href="#" class="text-primary">At praesentium minu</a></td>
-                        <td>$64</td>
-                        <td><span class="badge bg-success">Approved</span></td>
+                        <th scope="row"><a href="#">{{users.id}}</a></th>
+                        <th scope="row"><a href="#">GVS7f3hs</a></th>
+                        <td>{{users.group.name}}</td>
+                        <td>{{users.name}}</td>
+                        <td><a href="#" class="text-primary">{{users.start_date}}</a></td>
+                        <td>{{users.tag}}</td>
+                        <td>{{users.unit}}</td>
+                        
+                        <td>
+                          {% if users.status == 'pending'%}
+                          <span class="badge bg-warning  bg-soft-warning text-white p-2 me-2">
+                              {% elif users.status == 'in-progress'%}
+                              <span class="badge bg-primary  bg-soft-primary text-white p-2 me-2">
+                              {% elif users.status == 'completed'%}
+                              <span class="badge bg-success  bg-soft-success text-white p-2 me-2">
+                                  {% elif users.status == 'denied'%}
+                                  <span class="badge bg-danger  bg-soft-danger text-white p-2 me-2">
+                                    
+                                  {%endif%}
+                               
+                             {{ users.status}}
+                        
+                      </td>
+
+                      {% if current_user.role =='admin'%}
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                      Actions
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                      <li><a  class="dropdown-item" href="{{url_for('update_claim_status', id=users.id, status='pending')}}">Pending</a></li>
+                                      <li><a class="dropdown-item" href="{{url_for('update_claim_status', id=users.id, status='in-progress')}}">In-progress</a></li>
+                                      <li><a class="dropdown-item" href="{{url_for('update_claim_status', id=users.id, status='completed')}}">Completed</a></li>
+                                      <li><a class="dropdown-item" href="{{url_for('update_claim_status', id=users.id, status='denied')}}">Denied</a></li>
+                                    </ul>
+                                  </div>
+                            </td>
+                      {% endif %}
                       </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2147</a></th>
-                        <td>Bridie Kessler</td>
-                        <td><a href="#" class="text-primary">Blanditiis dolor omnis similique</a></td>
-                        <td>$47</td>
-                        <td><span class="badge bg-warning">Pending</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2049</a></th>
-                        <td>Ashleigh Langosh</td>
-                        <td><a href="#" class="text-primary">At recusandae consectetur</a></td>
-                        <td>$147</td>
-                        <td><span class="badge bg-success">Approved</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2644</a></th>
-                        <td>Angus Grady</td>
-                        <td><a href="#" class="text-primar">Ut voluptatem id earum et</a></td>
-                        <td>$67</td>
-                        <td><span class="badge bg-danger">Rejected</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2644</a></th>
-                        <td>Raheem Lehner</td>
-                        <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                        <td>$165</td>
-                        <td><span class="badge bg-success">Approved</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2644</a></th>
-                        <td>Raheem Lehner</td>
-                        <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                        <td>$165</td>
-                        <td><span class="badge bg-success">Approved</span></td>
-                      </tr>
+                      {%endfor%}
                     </tbody>
                   </table>
 

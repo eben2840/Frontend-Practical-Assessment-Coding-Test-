@@ -223,7 +223,6 @@ class Addinfo(FlaskForm):
 class GroupForm(FlaskForm):
     name = StringField('Group Name')
     end_date = StringField('End Start')
-    start_date = DateField('Start Date', validators=[DataRequired()])
     submit = SubmitField('Submit')
     
 class Budgetform(FlaskForm):
@@ -235,9 +234,13 @@ class Budgetform(FlaskForm):
 
 class AddItemForm(FlaskForm):
     group = SelectField('Select Group', coerce=int)
-    item_name = StringField('Item Name')
+    name = StringField('Item Name')
     quantity = StringField('Quantity')
     tag= StringField('Dependant')
+    unit= StringField('unit')
+    country = SelectField('Country', validators=[DataRequired()]) 
+    nation = SelectField('Nation', validators=[DataRequired()]) 
+    start_date = DateField('Start Date', validators=[DataRequired()])
     price = StringField('Price', validators=[DataRequired()])
     submit = SubmitField('Add Item')
     
@@ -271,6 +274,7 @@ class Registration(FlaskForm):
     email = StringField('Email', validators=[DataRequired()])
     phone = StringField('Phone', validators=[DataRequired()])
     name = StringField('Name', validators=[DataRequired()]) 
+    role = SelectField('role', choices=[('Tag','Tag'),('admin', 'admin'), ('client','client') ], default=None )
     # unique_code = StringField('Unique Code', validators=[DataRequired(), Length(min=8, max=8)]) 
     password = PasswordField('password_hash', validators=[DataRequired(), EqualTo('confirm_password', message='Password Must Match!')]) 
     confirm_password = PasswordField('confirm password', validators=[DataRequired()]) 

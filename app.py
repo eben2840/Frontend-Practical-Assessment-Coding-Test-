@@ -29,6 +29,7 @@ from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, timedelta
 import secrets
+import pycountry
 
 
 app=Flask(__name__)
@@ -88,6 +89,7 @@ class Person(db.Model, UserMixin):
     id= db.Column(db.Integer, primary_key=True)
     name= db.Column(db.String())
     email= db.Column(db.String())
+    role= db.Column(db.String())
     unique_code = db.Column(db.String(12)) 
     code= db.Column(db.String())
     phone= db.Column(db.String())
@@ -386,12 +388,17 @@ class Groups(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userId = db.Column(db.Integer())
     name = db.Column(db.String())
-    start_date = db.Column(db.Date)
     items = db.relationship('Item', backref='group', lazy=True)
 
 class Item(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    userid = db.Column(db.String())
     name = db.Column(db.String())
+    unit = db.Column(db.String())
+    status= db.Column(db.String())
+    country = db.Column(db.String())
+    nation = db.Column(db.String())
+    start_date = db.Column(db.Date)
     quantity = db.Column(db.String())
     price = db.Column(db.String)
     tag = db.Column(db.String)
@@ -523,22 +530,24 @@ if not os.path.exists(UPLOAD_FOLDER):
 
 @app.route('/group', methods=['GET', 'POST'])
 def group():
+    total_sms=Committee.query.count()
+    sms=Committee.query.order_by(Committee.id.desc()).all()  
     form = GroupForm()
 
     if form.validate_on_submit():
         group = Groups(
             userId=current_user.id,
             name=form.name.data,
-            start_date=form.start_date.data 
+             
         )
         db.session.add(group)
         db.session.commit()
 
-        flash("You just added a new Client")
-        return redirect(url_for('homelook'))
+        flash("New Category Added")
+        return redirect(url_for('admindashboard'))
 
     print(form.errors)
-    return render_template('groups.html', form=form)
+    return render_template('groups.html', form=form,total_sms=total_sms,sms=sms)
 
 
 
@@ -550,18 +559,55 @@ def generate_unique_code():
 # code = generate_unique_code()
 # print("new code" + code)
 
+def get_country_choices():
+    countries = [(country.alpha_2, country.name) for country in pycountry.countries]
+    return countries
+
+def get_nation_choices():
+    nations = [(nation.alpha_2, nation.name) for nation in pycountry.countries]
+    return nations
+
+
+@app.route('/update_claim_status/<int:id>/<string:status>', methods=['POST', 'GET'])
+def update_claim_status(id,status):
+    
+  
+    try:
+        cisl= Item.query.get_or_404(id)
+        print("cisl:",cisl)
+        
+            
+        cisl.status=status
+        db.session.commit()
+        print("cisl.status:",cisl.status)
+    except Exception as e:
+        print(e)
+        print("status:",cisl.status)
+        flash ("Status Successfully Changed")
+    return redirect (url_for('admindashboard'))
 
 
 @app.route('/add_item', methods=['GET', 'POST'])
 def add_item():
+    sms=Committee.query.order_by(Committee.id.desc()).all()  
+    total_sms=Committee.query.count()
     form = AddItemForm()
    
     form.group.choices = [(group.id, group.name) for group in Groups.query.all()]
-
+    form.country.choices = get_country_choices()
+    form.nation.choices = get_nation_choices()
+    
     if form.validate_on_submit():
+        selected_country = form.country.data
+        selected_nation = form.nation.data
         item = Item(
-            name=form.item_name.data,
+            userid=current_user.id,
+            country=selected_country,
+            nation=selected_nation,
+            unit=form.unit.data,
+            name=form.name.data,
             group_id=form.group.data,
+            start_date=form.start_date.data,
             tag=form.tag.data,
             price=form.price.data,
             quantity=form.quantity.data
@@ -575,17 +621,17 @@ def add_item():
         
        
             
-        flash("Order Item Placed.", "Success")
+        flash("New Order Placed.", "Success")
 
         return redirect(url_for('admindashboard'))
 
     print(form.errors)
-    return render_template('add_item.html', form=form)
+    return render_template('add_item.html', form=form,sms=sms, total_sms=total_sms)
 
     
 radio = 'yboateng057@gmail.com'
 email_password = 'hsgtqiervnkabcma'
-radio_display_name = 'CISL Team'
+radio_display_name = 'GVS Support Team'
 
 # users_data = [
 #     {'email': 'user1@example.com', 'date': '2022-01-01', 'activity': 'Activity 1', 'implementation': 'Implementation 1', 'tag': 'Tag 1', 'challenges': 'Challenges 1', 'future': 'Future 1'},
@@ -595,7 +641,7 @@ radio_display_name = 'CISL Team'
 def send_email():
     if request.method == 'POST':
         email_receiver = request.form['email']
-        subject = 'Welcome to CISL'
+        subject = 'Welcome to GVSGROUP'
         
         
         
@@ -870,11 +916,6 @@ def school():
 def closed():
     return render_template('closed.html')
 
-
-@app.route('/message', methods=['GET', 'POST'])
-def messages():
-    users =Committee.query.order_by(Committee.id.desc()).all()
-    return render_template('messages.html',users=users)
 
 
 @app.route('/analytics', methods=['GET', 'POST'])
@@ -1527,22 +1568,22 @@ def verify_code():
 
 
 
-@app.route('/update_claim_status/<int:id>/<string:status>', methods=['POST', 'GET'])
-def update_claim_status(id,status):
-    print("Update_claim_status")
-    print("id:",id)
-    print("status:",status)
-    try:
-        cisl= Cisl.query.get_or_404(id)
-        print("cisl:",cisl)
-        cisl.status=status
-        db.session.commit()
-        print("cisl.status:",cisl.status)
-    except Exception as e:
-        print(e)
-        print("status:",cisl.status)
-        flash ("Status Successfully Changed")
-    return redirect (url_for('main'))
+# @app.route('/update_claim_status/<int:id>/<string:status>', methods=['POST', 'GET'])
+# def update_claim_status(id,status):
+#     print("Update_claim_status")
+#     print("id:",id)
+#     print("status:",status)
+#     try:
+#         cisl= Cisl.query.get_or_404(id)
+#         print("cisl:",cisl)
+#         cisl.status=status
+#         db.session.commit()
+#         print("cisl.status:",cisl.status)
+#     except Exception as e:
+#         print(e)
+#         print("status:",cisl.status)
+#         flash ("Status Successfully Changed")
+#     return redirect (url_for('main'))
 
 
 
@@ -1873,17 +1914,37 @@ def main():
 def adminlogin(userid):
     user = Person.query.get_or_404(userid)
     login_user(user)
-    return redirect(url_for("main"))
+    return redirect(url_for("admindashboard"))
 
 @app.route('/admindashboard', methods=['GET', 'POST'])
 @login_required
 def admindashboard():
-    item = Item.query.count()
-    return render_template('gvs/admindashboard.html', item=item)
+    total_sms=Committee.query.count()
+    item = Item.query.count() #User.query.filter_by(id=current_user.id).count()
+    sms=Committee.query.order_by(Committee.id.desc()).all()  
+#User.query.filter_by(id=current_user.id).count()
+    group = Groups.query.count() #User.query.filter_by(id=current_user.id).count()
+    completed_category = Item.query.filter_by(status='completed').count() #User.query.filter_by(id=current_user.id).count()
+    progress_category = Item.query.filter_by(status='in-progress').count() #User.query.filter_by(id=current_user.id).count()
+    denied_category = Item.query.filter_by(status='denied').count() #User.query.filter_by(id=current_user.id).count()
+    pending_category = Item.query.filter_by(status='pending').count() #User.query.filter_by(id=current_user.id).count()
+    # User.query.filter_by(gender='Male').count()
+    users=Item.query.order_by(Item.id.desc()).all()
+    return render_template('gvs/admindashboard.html',total_sms=total_sms,sms=sms,pending_category=pending_category,denied_category=denied_category,progress_category=progress_category,completed_category=completed_category,group=group, item=item,users=users)
+    
+@app.route('/allorder', methods=['GET', 'POST'])
+@login_required
+def allorder():
+    total_sms=Committee.query.count()
+    item = Item.query.count() #User.query.filter_by(id=current_user.id).count()
+    group = Groups.query.count() #User.query.filter_by(id=current_user.id).count()
+    users=Item.query.order_by(Item.id.desc()).all()
+    return render_template('gvs/allorder.html',total_sms=total_sms,group=group, item=item,users=users)
     
 @app.route('/adminprofile', methods=['GET', 'POST'])
 def adminprofile():
-    return render_template('gvs/adminprofile.html')
+    total_sms=Committee.query.count()
+    return render_template('gvs/adminprofile.html', total_sms=total_sms)
     
 @app.route('/tablesdata', methods=['GET', 'POST'])
 def tablesdata():
@@ -1893,17 +1954,21 @@ def tablesdata():
 def tablesgeneral():
     return render_template('gvs/tables-general.html')
 
+
+
 @app.route('/allclients', methods=['GET', 'POST'])
 @login_required
 def allclients():
+    total_sms=Committee.query.count()
     if current_user.role == 'admin':
-        users = Person.query.filter_by(role="client").order_by(Person.id.desc()).all()
+        # users = Person.query.filter_by(role="client").order_by(Person.id.desc()).all()
+        users = Person.query.order_by(Person.id.desc()).all()
         # staff = User.query.order_by(User.id.desc()).all()
         print(users)
     else:
         # flash("youre not allowed to see this")
-        return redirect (url_for("main"))
-    return render_template('allclient.html',users=users)
+        return redirect (url_for("admindasboard"))
+    return render_template('allclient.html',users=users,total_sms=total_sms)
 
 
 @app.route('/allstaff', methods=['GET', 'POST'])
@@ -2061,26 +2126,34 @@ def instock():
     instock = Item.query.count()
     return render_template("instock.html",users=users,instock = instock)
 
-@app.route('/sms', methods=['GET', 'POST'])
-def sms():   
-    return render_template("sms.html")
+
 
 
 @app.route('/choose', methods=['GET', 'POST'])
-def choose():   
+def choose():    
     return render_template("choose.html")
 
-@app.route('/message', methods=['GET', 'POST'])
-def message():
-    form=MessageForm()
+
+@app.route('/dashlayout', methods=['GET', 'POST'])
+def dashlayout(): 
+    sms=Committee.query.order_by(Committee.id.desc()).all()  
+    return render_template("dashlayout.html",sms=sms)
+
+@app.route('/sms', methods=['GET', 'POST'])
+@login_required
+def sms():
+    total_sms=Committee.query.count()
+    form=CommitteeForm()
     if form.validate_on_submit():
-        new=Message(message=form.message.data
+        new=Committee(
+            name=form.name.data,
+            description=form.description.data
                     )
         db.session.add(new)
         db.session.commit()
-        flash("Thanks for Sending to Anonymous")
-        return redirect("/")
-    return render_template('message.html', form=form)
+        flash("Bulk SMS sent Successfully")
+        return redirect("/admindashboard")
+    return render_template('message.html',total_sms=total_sms, form=form)
 
 
 
@@ -2306,6 +2379,13 @@ def base():
 #             flash("You searched for "+ postsearched, "success")  
 #             print(posts)   
 #     return render_template("search.html", form=form, searched =postsearched, posts=posts)
+
+
+@app.route('/message/<int:userid>', methods=['GET', 'POST'])
+def messages(userid):
+    profile=Committee.query.get_or_404(userid)
+    # users =Committee.query.order_by(Committee.id.desc()).all()
+    return render_template('messages.html',profile=profile)
 
 
 @app.route('/list/<int:userid>', methods=['GET', 'POST'])
@@ -2563,7 +2643,7 @@ def signup():
     form = Registration()
     if form.validate_on_submit():
         
-        # unique_code = str(secrets.randbelow(10**12)).zfill(12)  
+        unique_code = str(secrets.randbelow(10**12)).zfill(12)  
         
         
         if len(str(form.code.data)) != 4:
@@ -2579,15 +2659,16 @@ def signup():
                         confirm_password=form.confirm_password.data,
                         email=form.email.data,
                         code=form.code.data, 
+                        role=form.role.data, 
                         phone=form.phone.data,
-                        # unique_code=unique_code,
+                        unique_code=unique_code,
                         name=form.name.data)
             db.session.add(user)
             db.session.commit()
-            # send_email()
-            # params = "New Account Created for " + new_user.username
-            # sendtelegram(params)
-            flash("We will send you a confirmation Email, kindly confirm your email.", 'success')
+            send_email()
+            params = "New Account Created for " + user.name
+            sendtelegram(params)
+            flash("We will send you a Confirmation Code, kindly Confirm your identity.", 'success')
            
             # user = Person.query.filter_by(email = form.email.data).first()
             login_user(user, remember=True)
@@ -2623,29 +2704,29 @@ def localrate():
 
 # Dictionary containing duty and VAT rates for items
 items_rates = {
-    "Album": {"duty_rate": 20, "vat_rate": 14},
-    "All clothing": {"duty_rate": 20, "vat_rate": 14},
-    "Appliances": {"duty_rate": 20, "vat_rate": 14},
-    "Car Parts": {"duty_rate": 30, "vat_rate": 14},
-    "Cellular Phones": {"duty_rate": 0, "vat_rate": 0},
-    "Cosmetics": {"duty_rate": 20, "vat_rate": 14},
-    "Costume Jewelry": {"duty_rate": 60, "vat_rate": 14},
-    "Digital Cameras": {"duty_rate": 25, "vat_rate": 14},
+    "album": {"duty_rate": 20, "vat_rate": 14},
+    "clothing": {"duty_rate": 20, "vat_rate": 14},
+    "appliances": {"duty_rate": 20, "vat_rate": 14},
+    "car parts": {"duty_rate": 30, "vat_rate": 14},
+    "phones": {"duty_rate": 0, "vat_rate": 0},
+    "cosmetics": {"duty_rate": 20, "vat_rate": 14},
+    "jewelry": {"duty_rate": 60, "vat_rate": 14},
+    "cameras": {"duty_rate": 25, "vat_rate": 14},
     "DVDs": {"duty_rate": 30, "vat_rate": 14},
-    "Electronics": {"duty_rate": 20, "vat_rate": 14},
-    "Furniture": {"duty_rate": 20, "vat_rate": 14},
+    "electronics": {"duty_rate": 20, "vat_rate": 14},
+    "furniture": {"duty_rate": 20, "vat_rate": 14},
     "IPods/Musical Storage Devices": {"duty_rate": 20, "vat_rate": 14},
     "Jewelry": {"duty_rate": 50, "vat_rate": 14},
-    "Musial Equipment": {"duty_rate": 10, "vat_rate": 14},
-    "Shoes": {"duty_rate": 20, "vat_rate": 14},
-    "Speakers": {"duty_rate": 20, "vat_rate": 14},
-    "Toys": {"duty_rate": 20, "vat_rate": 14},
+    "musial Equipment": {"duty_rate": 10, "vat_rate": 14},
+    "shoes": {"duty_rate": 20, "vat_rate": 14},
+    "speakers": {"duty_rate": 20, "vat_rate": 14},
+    "toys": {"duty_rate": 20, "vat_rate": 14},
     "Video Games": {"duty_rate": 20, "vat_rate": 14},
     "Vitamins & Food Supplements": {"duty_rate": 20, "vat_rate": 14},
-    "Watches": {"duty_rate": 50, "vat_rate": 14},
+    "watches": {"duty_rate": 50, "vat_rate": 14},
     "3-in-1 Machines": {"duty_rate": 0, "vat_rate": 14},
     "Blank DVDs & CDs": {"duty_rate": 5, "vat_rate": 14},
-    "Books": {"duty_rate": 0, "vat_rate": 0},
+    "books": {"duty_rate": 0, "vat_rate": 0},
     "CD ROM (Software)": {"duty_rate": 45, "vat_rate": 14},
     "CDs (Music)": {"duty_rate": 45, "vat_rate": 14},
     "Computer Monitors": {"duty_rate": 0, "vat_rate": 0},
@@ -2671,7 +2752,7 @@ def get_rates():
         rates = items_rates[item]
         return render_template('gvs/gvslocalrate.html', item=item, rates=rates)
     else:
-        return render_template('gvs/gvslocalrate.html', error="Item not found")
+        return render_template('gvs/gvslocalrate.html', error="Kindly reach out to our Customer Service")
 
 
 @app.route('/aboutgvs', methods=['GET', 'POST'])

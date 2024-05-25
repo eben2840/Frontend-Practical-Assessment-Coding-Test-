@@ -1,5 +1,5 @@
 
-{% extends 'landingpage.html' %}
+{% extends 'gvs/dashlayout.html' %}
 
 {% block body %}
 <div class="container">
@@ -27,18 +27,19 @@
             
             
             </div>-->
-        <div class="col-lg-12">
-  
+        
+            <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Create your own category </h5>
+            
     <form method="POST" action="{{ url_for('group') }}"style="background-color:#fff; padding:30px; border-radius:20px;">
        
         {{ form.hidden_tag() }}
 
-        <label for="name">CISL Client:</label>
-        {{ form.name(class="input-field", style="width:100%;" , placeholder="Client Name") }}
+        <label for="name">Add A New Category</label>
+        {{ form.name(class="form-control", style="width:100%;" , placeholder="Client Name") }}
         <br>
-        <p>{{ form.start_date.label }} {{ form.start_date( class="input-field", id="floatingInput", style="width:100%;", required="required") }}</p>
-       <br>
-        {{ form.submit(class="btn btn-primary" , style="width:100%;" ) }}
+        {{ form.submit(class="btn btn-primary", style="width:100%;" ) }}
     </form>
 
     {% if form.errors %}
@@ -55,9 +56,6 @@
     {% endif %}
 </div>
 
-<div class="col-lg-6">
-                                   
-</div>
 
 </div>
 </div>

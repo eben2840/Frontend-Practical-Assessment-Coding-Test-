@@ -1,0 +1,122 @@
+{% extends 'gvs/dashlayout.html' %}
+
+{% block body %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-success" role="alert">
+          {{ message }}
+        </div>
+        
+        
+      {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <div class="pagetitle">
+      <h1>Show All Orders</h1>
+    
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="row">
+
+       
+           
+            <!-- Recent Sales -->
+            <div class="col-12">
+              <div class="card recent-sales overflow-auto">
+
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </ul>
+                </div>
+
+                <div class="card-body">
+                  <h5 class="card-title">Recent Sales <span></span></h5>
+
+                  <table class="table table-borderless datatable">
+                    <thead>
+                      <tr>
+                        <th scope="col">Customer ID</th>
+                        <th scope="col">Item ID</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Receiver's Name </th>
+                        <th scope="col">Date ordered</th>
+                        <th scope="col">Phone Number</th>
+                        <th scope="col">Unit</th>
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {%for users in users%}
+                      <tr>
+                        <th scope="row"><a href="#">{{users.id}}</a></th>
+                        <th scope="row"><a href="#">GVS7f3hs</a></th>
+                        <td>{{users.group.name}}</td>
+                        <td>{{users.name}}</td>
+                        <td><a href="#" class="text-primary">{{users.start_date}}</a></td>
+                        <td>{{users.tag}}</td>
+                        <td>{{users.unit}}</td>
+                        
+                        <td>
+                          {% if users.status == 'pending'%}
+                          <span class="badge bg-warning  bg-soft-warning text-white p-2 me-2">
+                              {% elif users.status == 'in-progress'%}
+                              <span class="badge bg-primary  bg-soft-primary text-white p-2 me-2">
+                              {% elif users.status == 'completed'%}
+                              <span class="badge bg-success  bg-soft-success text-white p-2 me-2">
+                                  {% elif users.status == 'denied'%}
+                                  <span class="badge bg-danger  bg-soft-danger text-white p-2 me-2">
+                                    
+                                  {%endif%}
+                               
+                             {{ users.status}}
+                        
+                      </td>
+
+                      {% if current_user.role =='admin'%}
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                      Actions
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                      <li><a  class="dropdown-item" href="{{url_for('update_claim_status', id=users.id, status='pending')}}">Pending</a></li>
+                                      <li><a class="dropdown-item" href="{{url_for('update_claim_status', id=users.id, status='in-progress')}}">In-progress</a></li>
+                                      <li><a class="dropdown-item" href="{{url_for('update_claim_status', id=users.id, status='completed')}}">Completed</a></li>
+                                      <li><a class="dropdown-item" href="{{url_for('update_claim_status', id=users.id, status='denied')}}">Denied</a></li>
+                                    </ul>
+                                  </div>
+                            </td>
+                      {% endif %}
+                      </tr>
+                      {%endfor%}
+                    </tbody>
+                  </table>
+
+                </div>
+
+              </div>
+            </div><!-- End Recent Sales -->
+
+            
+
+       
+          </div>
+        </div>
+        <!-- End Left side columns -->
+
+        
+      </div>
+    </section>
+
+    {%endblock body%}
