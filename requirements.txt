@@ -13,6 +13,7 @@ Flask-WTF==1.2.1
 frozenlist==1.4.1
 greenlet==3.0.3
 gunicorn==21.2.0
+pycountry==22.3.5
 idna==3.6
 itsdangerous==2.1.2
 Jinja2==3.1.3
