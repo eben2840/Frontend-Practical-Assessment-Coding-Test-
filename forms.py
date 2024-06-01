@@ -274,7 +274,6 @@ class Registration(FlaskForm):
     email = StringField('Email', validators=[DataRequired()])
     phone = StringField('Phone', validators=[DataRequired()])
     name = StringField('Name', validators=[DataRequired()]) 
-    role = SelectField('role', choices=[('Tag','Tag'),('admin', 'admin'), ('client','client') ], default=None )
     # unique_code = StringField('Unique Code', validators=[DataRequired(), Length(min=8, max=8)]) 
     password = PasswordField('password_hash', validators=[DataRequired(), EqualTo('confirm_password', message='Password Must Match!')]) 
     confirm_password = PasswordField('confirm password', validators=[DataRequired()]) 

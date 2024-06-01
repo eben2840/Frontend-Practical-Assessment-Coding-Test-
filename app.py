@@ -2662,7 +2662,6 @@ def signup():
                         confirm_password=form.confirm_password.data,
                         email=form.email.data,
                         code=form.code.data, 
-                        role=form.role.data, 
                         phone=form.phone.data,
                         unique_code=unique_code,
                         name=form.name.data)
