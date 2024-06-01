@@ -36,7 +36,9 @@ import pycountry
 app=Flask(__name__)
 CORS(app)
 # 'postgresql://postgres:new_password@45.222.128.55:5432/src'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://u2p76os7t2u6qs:p8ee899a0507bc22f4ed472e199c965ba27adb33a607c64c8b38dfef3d36ded0a@c9uss87s9bdb8n.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/d36c554dgjtua0'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:new_password@45.222.128.55:5432/eben'
 # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("CENTRAL_MINISTRY_DB_URL","sqlite:///test.db")
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:new_password@45.222.128.55:5432/src'
