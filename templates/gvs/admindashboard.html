@@ -289,7 +289,7 @@
                     <thead>
                       <tr>
                         <th scope="col">Customer ID</th>
-                        <th scope="col">Item ID</th>
+                        <!--<th scope="col">Item ID</th>-->
                         <th scope="col">Category</th>
                         <th scope="col">Receiver's Name </th>
                         <th scope="col">Date ordered</th>
@@ -301,13 +301,15 @@
                     <tbody>
                       {%for users in users%}
                       <tr>
-                        <th scope="row"><a href="#">{{users.id}}</a></th>
-                        <th scope="row"><a href="#">GVS7f3hs</a></th>
+                        <th scope="row"><a href="{{url_for("clientid", userid=users.id)}}">{{users.id}}</a></th>
+                        <!--<th scope="row">{{users.items_rates}}</th>-->
                         <td>{{users.group.name}}</td>
                         <td>{{users.name}}</td>
                         <td><a href="#" class="text-primary">{{users.start_date}}</a></td>
                         <td>{{users.tag}}</td>
                         <td>{{users.unit}}</td>
+                       <!-- <td>{{ users.duty_rate }}%</td> <!-- Display Duty Rate --
+                        <td>{{ users.vat_rate }}%</td>-->
                         
                         <td>
                           {% if users.status == 'pending'%}

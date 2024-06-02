@@ -403,6 +403,7 @@ class Item(db.Model):
     nation = db.Column(db.String())
     start_date = db.Column(db.Date)
     quantity = db.Column(db.String())
+    address = db.Column(db.String)
     price = db.Column(db.String)
     tag = db.Column(db.String)
     group_id = db.Column(db.Integer, db.ForeignKey('groups.id', name='ft_item_group_id'))
@@ -603,33 +604,78 @@ def add_item():
     if form.validate_on_submit():
         selected_country = form.country.data
         selected_nation = form.nation.data
+        selected_item = form.items_rates.data
+        item_rate = items_rates[selected_item]
+        
+        
+        duty_rate = item_rate['duty_rate']
+        vat_rate = item_rate['vat_rate']
+        # price = float(form.price.data)
+        # duty = price * item_rate['duty_rate'] 
+        # vat = price * item_rate['vat_rate'] 
+        # total_price = price + duty + vat
+        
         item = Item(
             userid=current_user.id,
             country=selected_country,
             nation=selected_nation,
             unit=form.unit.data,
+          
             name=form.name.data,
             group_id=form.group.data,
             start_date=form.start_date.data,
             tag=form.tag.data,
-            price=form.price.data,
+            price=None,
+            address=form.address.data,
             quantity=form.quantity.data
         )
         
         db.session.add(item)
         db.session.commit()
+        print("Selected Item Rate:", form.items_rates.data)
+
         
-        # print(form.name.data)
-        # print(form.group_id.data)
-        
+        sendtelegram("New Order Sent" + '\n' + 
+             "______________" + '\n' +
+             "Name = " + item.name  + '\n' + 
+             "Category = " + str(item.group.name)  + '\n' + 
+             "Date = " + item.start_date.strftime("%Y-%m-%d")  + '\n' + 
+             "From = " + item.country  + '\n' + 
+             "To = " + item.nation  + '\n' + 
+             "Number = " + str(item.tag) + '\n' + 
+             "Unit = " + item.unit + '\n' + 
+             "Address = " + str(item.address) + '\n' + 
+             "UniqueCode = " + str(item.quantity)+ '\n' + 
+             "Duty Rate = " + str(duty_rate) + "%" + '\n' + 
+             "VAT Rate = " + str(vat_rate) + "%"
+            )
        
             
         flash("New Order Placed.", "Success")
-
+        # return redirect(url_for('show_rates', item_id=item.id))
         return redirect(url_for('admindashboard'))
 
     print(form.errors)
     return render_template('add_item.html', form=form,sms=sms, total_sms=total_sms)
+
+
+@app.route('/show_rates/<int:item_id>')
+def show_rates(item_id):
+    # Query the item from the database using its ID
+    item = Item.query.get_or_404(item_id)
+    
+    # Get the selected item rate details
+    selected_item = item.name
+    item_rate = items_rates.get(selected_item)
+    
+    if not item_rate:
+        flash("Item rate not found. Please select a valid item.", "Error")
+        return redirect(url_for('add_item'))
+    
+    duty_rate = item_rate['duty_rate']
+    vat_rate = item_rate['vat_rate']
+    
+    return render_template('show_rates.html', item=item, duty_rate=duty_rate, vat_rate=vat_rate)
 
     
 radio = 'yboateng057@gmail.com'
@@ -1919,20 +1965,45 @@ def adminlogin(userid):
     login_user(user)
     return redirect(url_for("admindashboard"))
 
+
+ 
+
 @app.route('/admindashboard', methods=['GET', 'POST'])
 @login_required
 def admindashboard():
     total_sms=Committee.query.count()
-    item = Item.query.count() #User.query.filter_by(id=current_user.id).count()
-    sms=Committee.query.order_by(Committee.id.desc()).all()  
-#User.query.filter_by(id=current_user.id).count()
-    group = Groups.query.count() #User.query.filter_by(id=current_user.id).count()
-    completed_category = Item.query.filter_by(status='completed').count() #User.query.filter_by(id=current_user.id).count()
-    progress_category = Item.query.filter_by(status='in-progress').count() #User.query.filter_by(id=current_user.id).count()
-    denied_category = Item.query.filter_by(status='denied').count() #User.query.filter_by(id=current_user.id).count()
-    pending_category = Item.query.filter_by(status='pending').count() #User.query.filter_by(id=current_user.id).count()
-    # User.query.filter_by(gender='Male').count()
-    users=Item.query.order_by(Item.id.desc()).all()
+    sms=Committee.query.order_by(Committee.id.desc()).all() 
+    
+    if current_user.role == 'admin':
+        item = Item.query.count()
+        group = Groups.query.count() #User.query.filter_by(id=current_user.id).count()
+        completed_category = Item.query.filter_by(status='completed').count() #User.query.filter_by(id=current_user.id).count()
+        progress_category = Item.query.filter_by(status='in-progress').count() #User.query.filter_by(id=current_user.id).count()
+        denied_category = Item.query.filter_by(status='denied').count() #User.query.filter_by(id=current_user.id).count()
+        pending_category = Item.query.filter_by(status='pending').count() #User.query.filter_by(id=current_user.id).count()
+    else:
+        item = Item.query.filter_by(userid=str(current_user.id)).count()
+        group = Groups.query.filter_by(userId=str(current_user.id)).count() #User.query.filter_by(id=current_user.id).count()
+        completed_category = Item.query.filter_by(status='completed', userid=str(current_user.id)).count() #User.query.filter_by(id=current_user.id).count()
+        progress_category = Item.query.filter_by(status='in-progress', userid=str(current_user.id)).count() #User.query.filter_by(id=current_user.id).count()
+        denied_category = Item.query.filter_by(status='denied', userid=str(current_user.id)).count() #User.query.filter_by(id=current_user.id).count()
+        pending_category = Item.query.filter_by(status='pending', userid=str(current_user.id)).count() #User.query.filter_by(id=current_user.id).count()
+        #User.query.filter_by(gender='Male').count()
+    
+    if current_user.role == 'admin':
+        users = Item.query.order_by(Item.id.desc()).all()
+        print(users)
+    else:
+        users=Item.query.filter_by(userid=str(current_user.id)).order_by(Item.id.desc()).all()
+
+    for user in users:
+        item_rate = items_rates.get(user.name)
+        if item_rate:
+            user.duty_rate = item_rate['duty_rate']
+            user.vat_rate = item_rate['vat_rate']
+            print(user.duty_rate, user.vat_rate)
+    
+    # users=Item.query.filter_by(id=current_user.id).order_by(Item.id.desc()).all()
     return render_template('gvs/admindashboard.html',total_sms=total_sms,sms=sms,pending_category=pending_category,denied_category=denied_category,progress_category=progress_category,completed_category=completed_category,group=group, item=item,users=users)
     
 @app.route('/allorder', methods=['GET', 'POST'])
@@ -1964,8 +2035,8 @@ def tablesgeneral():
 def allclients():
     total_sms=Committee.query.count()
     if current_user.role == 'admin':
-        # users = Person.query.filter_by(role="client").order_by(Person.id.desc()).all()
-        users = Person.query.order_by(Person.id.desc()).all()
+        users = Person.query.filter_by(role="client").order_by(Person.id.desc()).all()
+        # users = Person.query.order_by(Person.id.desc()).all()
         # staff = User.query.order_by(User.id.desc()).all()
         print(users)
     else:
@@ -2377,12 +2448,19 @@ def base():
 #             postsearched=form.searched.data
 #             posts =posts.filter(Course.name.like('%'+ postsearched + '%') )
 #             posts =posts.order_by(Course.schools).all()
-             
+  
 #             # posts =posts.order_by(User.position).all() 
 #             flash("You searched for "+ postsearched, "success")  
 #             print(posts)   
 #     return render_template("search.html", form=form, searched =postsearched, posts=posts)
 
+@app.route('/clients/<int:userid>', methods=['GET', 'POST'])
+@login_required
+def clientid(userid):
+    print("Fetching one")
+    profile=Item.query.get_or_404(userid)
+    # print(current_user)
+    return render_template("gvs/clientid.html", profile=profile)
 
 @app.route('/message/<int:userid>', methods=['GET', 'POST'])
 def messages(userid):
@@ -2772,7 +2850,6 @@ def privacy_policy():
 
 @app.route('/supportteam', methods=['GET', 'POST'])
 def supportteam():
-    
     form=WaitForm()
     print("form submitted:", form.validate_on_submit())
     if form.validate_on_submit():

@@ -44,7 +44,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="/" class="logo d-flex align-items-center">
         <img src="static/assets/img/log.png" alt="">
       
       </a>
@@ -62,11 +62,12 @@
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
 
-        <li class="nav-item d-block d-lg-none">
+        <!--<li class="nav-item d-block d-lg-none">
           <a class="nav-link nav-icon search-bar-toggle " href="#">
             <i class="bi bi-search"></i>
           </a>
-        </li><!-- End Search Icon-->
+        </li>-->
+        <!-- End Search Icon-->
 
         <li class="nav-item dropdown">
 
@@ -92,19 +93,19 @@
          
 
           
-            <li class="notification-item">
+            <!--<li class="notification-item">
               <i class="bi bi-info-circle text-primary"></i>
               <div> 
                 <h4>Welcome {{current_user.name}}</h4>
                 <p>Enjoy our delivery packages. Kindly reach out to our <a href="">Customer Support</a> if you have any requests</p>
-                <!--<p>4 hrs. ago</p>-->
+               
               </div>
             </li>
 
             <li>
               <hr class="dropdown-divider">
             </li>
-           
+           -->
 
             {%for sms in sms%}
            <a href="{{url_for("messages", userid=sms.id)}}"> <li class="notification-item">
@@ -190,7 +191,7 @@
       <li class="nav-heading">{{current_user.role}} Dashboard</li>
 
       <li class="nav-item">
-        <a class="nav-link " href="admindashboard">
+        <a class="nav-link " href="/admindashboard">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -238,12 +239,7 @@
   
       {% endif %}
 
-     <!-- <li class="nav-item">
-        <a class="nav-link collapsed" href="admindashboard">
-          <i class="bi bi-card-list"></i>
-          <span>Invoice</span>
-        </a>
-      </li>-->
+   
       <!-- End Invoice Nav -->
 
       <li class="nav-item">
@@ -253,7 +249,13 @@
         </a>
       </li><!-- End Quotations Nav -->
 
-
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/adminprofile">
+          <i class="bi bi-gear"></i>
+          <span>Settings</span>
+        </a>
+      </li>
+     
      
 
       
