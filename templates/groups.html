@@ -30,14 +30,14 @@
         
             <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Create your own category </h5>
+                  <h5 class="card-title">Create Your Order Name </h5>
             
     <form method="POST" action="{{ url_for('group') }}"style="background-color:#fff; padding:30px; border-radius:20px;">
        
         {{ form.hidden_tag() }}
 
-        <label for="name">Add A New Category</label>
-        {{ form.name(class="form-control", style="width:100%;" , placeholder="Client Name") }}
+        <label for="name">Add A New Order</label>
+        {{ form.name(class="form-control", style="width:100%;" , placeholder="Order Name") }}
         <br>
         {{ form.submit(class="btn btn-primary", style="width:100%;" ) }}
     </form>

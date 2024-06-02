@@ -17,6 +17,8 @@
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
+  <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+  <div class="elfsight-app-41da7ebc-934d-4265-a1af-c7300f5700ea" data-elfsight-app-lazy></div>
   <!-- Vendor CSS Files -->
   <link href="static/asset/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="static/asset/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -188,7 +190,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
 
-      <li class="nav-heading">{{current_user.role}} Dashboard</li>
+      <li class="nav-heading">{{current_user.name}} Dashboard</li>
 
       <li class="nav-item">
         <a class="nav-link " href="/admindashboard">
@@ -200,7 +202,7 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="/group">
           <i class="bx bx-plus"></i>
-          <span>Create Categories</span>
+          <span>Create Order Name</span>
         </a>
       </li>
       
@@ -209,7 +211,7 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="add_item">
           <i class="bx bx-cart"></i>
-          <span>Order</span>
+          <span>Place Order</span>
         </a>
       </li>
       <!-- End Quotations Nav -->

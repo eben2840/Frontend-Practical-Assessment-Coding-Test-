@@ -620,7 +620,7 @@ def add_item():
             country=selected_country,
             nation=selected_nation,
             unit=form.unit.data,
-          
+          items_rates=selected_item,
             name=form.name.data,
             group_id=form.group.data,
             start_date=form.start_date.data,
@@ -646,6 +646,7 @@ def add_item():
              "Unit = " + item.unit + '\n' + 
              "Address = " + str(item.address) + '\n' + 
              "UniqueCode = " + str(item.quantity)+ '\n' + 
+             "Items = " + selected_item + '\n' + 
              "Duty Rate = " + str(duty_rate) + "%" + '\n' + 
              "VAT Rate = " + str(vat_rate) + "%"
             )
