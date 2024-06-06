@@ -296,6 +296,7 @@
                         <!--<th scope="col">Item Category</th>-->
                         <th scope="col">Unit</th>
                         <th scope="col">Actions</th>
+                   <!--     <th scope="col">Delete</th>-->
                       </tr>
                     </thead>
                     <tbody>
@@ -328,7 +329,7 @@
                       </td>
 
                       {% if current_user.role =='admin'%}
-                            <td>
+                      <td>
                                 <div class="dropdown">
                                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                       Actions
@@ -340,8 +341,19 @@
                                       <li><a class="dropdown-item" href="{{url_for('update_claim_status', id=users.id, status='denied')}}">Denied</a></li>
                                     </ul>
                                   </div>
-                            </td>
-                      {% endif %}
+                                </td>
+                                  {% endif %}
+
+                   
+                       <!-- <td>
+                          <a href="" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-trash fs-4"></i></a>
+                     
+                        </td>-->
+  <!-- Modal -->
+                       
+                                              
+                      
+                  
                       </tr>
                       {%endfor%}
                     </tbody>
@@ -362,5 +374,22 @@
         
       </div>
     </section>
-
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete Order</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+          Are you sure you want to delete this order?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            
+            <button type="button" class="btn btn-primary text-white"><a href="#">Yes, I do</a></button>
+          </div>
+        </div>
+      </div>
+    </div>
     {%endblock body%}

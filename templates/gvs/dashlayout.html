@@ -245,7 +245,7 @@
       <!-- End Invoice Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="admindashboard">
+        <a class="nav-link collapsed" href="/quotes">
           <i class="bi bi-bar-chart"></i>
           <span>Quotations</span>
         </a>
@@ -285,7 +285,30 @@
       <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
     </div>
   </footer><!-- End Footer -->
-
+  <script>
+    document.getElementById('packageForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      let weight = document.getElementById('weight').value;
+      fetch('/calculate_charges', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ weight: weight })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.charges) {
+          document.getElementById('result').innerText = `Charges for weight ${weight} lbs: $${data.charges.toFixed(2)}`;
+        } else {
+          document.getElementById('result').innerText = 'Contact customer service for rate';
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    });
+  </script>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->

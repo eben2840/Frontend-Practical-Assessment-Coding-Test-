@@ -2623,13 +2623,16 @@ def deleteme(id):
 
 @app.route("/deleteme/<int:id>")
 def deletelist(id):
-    delete=User.query.get_or_404(id)
+    delete=Item.query.get_or_404(id)
     try:
             db.session.delete(delete)
             db.session.commit()
-            return redirect(url_for('lists')) 
+            flash("Order Deleted", "success")
+            return redirect(url_for('admindashboard')) 
+        
     except: 
-        return "errrrrorrr"
+        flash("An error occurred while deleting the item", "danger")
+        return redirect(url_for('admindashboard'))
         
     
 #delete route
@@ -2693,10 +2696,12 @@ def mot():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        print(email)  
-        user = Person.query.filter_by(email=form.email.data).first()
+        
+        user=Person.query.filter(Person.email.ilike(form.email.data)).first()
+        # print(email)  
+        # user = Person.query.filter_by(email=form.email.data).first()
         print(form.email.data) 
-        print(form.password.data) 
+        
         if user and user.password ==form.password.data:
             login_user(user)
             print ("Logged in:" + user.code + " " + user.email)
@@ -2767,6 +2772,11 @@ def service():
 @app.route('/rate', methods=['GET', 'POST'])
 def rate():
     return render_template('gvs/gvsrate.html')
+
+@app.route('/quotes', methods=['GET', 'POST'])
+def quotes():
+    return render_template('gvs/quotes.html')
+
 
 @app.route('/shipping', methods=['GET', 'POST'])
 def shipping():
@@ -2999,13 +3009,7 @@ def calculate():
     except ValueError as e:
         return jsonify({'error': str(e)}), 400
     
-    
-    
-def is_gmail_address(email):
-    # Regular expression for a basic check of Gmail email address
-    gmail_pattern = r'^[a-zA-Z0-9_.+-]+@gmail\.com$'
-    return re.match(gmail_pattern, email)
-
+  
 
 
 @app.route('/departments/<string:schoolSlug>')
