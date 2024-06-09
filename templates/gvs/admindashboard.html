@@ -288,7 +288,7 @@
                   <table class="table table-borderless datatable">
                     <thead>
                       <tr>
-                        <th scope="col">Customer ID</th>
+                        <th scope="col">Invoice ID</th>
                         <!--<th scope="col">Item ID</th>-->
                         <th scope="col">Item Reqests</th>
                         <th scope="col">Receiver's Name </th>
@@ -296,14 +296,17 @@
                         <!--<th scope="col">Item Category</th>-->
                         <th scope="col">Unit</th>
                         <th scope="col">Actions</th>
+                      
+                        
                    <!--     <th scope="col">Delete</th>-->
                       </tr>
                     </thead>
                     <tbody>
                       {%for users in users%}
                       <tr>
-                        <th scope="row"><a href="{{url_for("clientid", userid=users.id)}}">{{users.id}}</a></th>
+                        <th scope="row"><a href="{{url_for("clientid", userid=users.id)}}">Invoice {{users.id}}</a></th>
                         <!--<th scope="row">{{users.items_rates}}</th>-->
+                       
                         <td><a href="{{url_for("clientid", userid=users.id)}}">{{users.group.name}}</a></td>
                         <td>{{users.name}}</td>
                         <td><a href="#" class="text-primary">{{users.start_date}}</a></td>
@@ -315,7 +318,7 @@
                         <td>
                           {% if users.status == 'pending'%}
                           <span class="badge bg-warning  bg-soft-warning text-white p-2 me-2">
-                              {% elif users.status == 'in-progress'%}
+                              {% elif users.status == 'awaiting payment'%}
                               <span class="badge bg-primary  bg-soft-primary text-white p-2 me-2">
                               {% elif users.status == 'completed'%}
                               <span class="badge bg-success  bg-soft-success text-white p-2 me-2">
@@ -328,6 +331,8 @@
                         
                       </td>
 
+                     
+
                       {% if current_user.role =='admin'%}
                       <td>
                                 <div class="dropdown">
@@ -336,13 +341,29 @@
                                     </button>
                                     <ul class="dropdown-menu">
                                       <li><a  class="dropdown-item" href="{{url_for('update_claim_status', id=users.id, status='pending')}}">Pending</a></li>
-                                      <li><a class="dropdown-item" href="{{url_for('update_claim_status', id=users.id, status='in-progress')}}">In-progress</a></li>
+                                      <li><a class="dropdown-item" href="{{url_for('update_claim_status', id=users.id, status='awaiting payment')}}">awaiting payment</a></li>
                                       <li><a class="dropdown-item" href="{{url_for('update_claim_status', id=users.id, status='completed')}}">Completed</a></li>
                                       <li><a class="dropdown-item" href="{{url_for('update_claim_status', id=users.id, status='denied')}}">Denied</a></li>
                                     </ul>
                                   </div>
                                 </td>
-                                  {% endif %}
+                                
+
+                                  {% elif current_user.role =='superadmin'%}
+                                  <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                  Actions
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                  <li><a  class="dropdown-item" href="{{url_for('update_claim_status', id=users.id, status='pending')}}">Pending</a></li>
+                                                  <li><a class="dropdown-item" href="{{url_for('update_claim_status', id=users.id, status='awaiting payment')}}">awaiting payment</a></li>
+                                                  <li><a class="dropdown-item" href="{{url_for('update_claim_status', id=users.id, status='completed')}}">Completed</a></li>
+                                                  <li><a class="dropdown-item" href="{{url_for('update_claim_status', id=users.id, status='denied')}}">Denied</a></li>
+                                                </ul>
+                                              </div>
+                                            </td>
+                                              {% endif %}
 
                    
                        <!-- <td>

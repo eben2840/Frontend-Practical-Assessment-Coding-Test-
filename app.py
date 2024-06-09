@@ -610,10 +610,7 @@ def add_item():
         
         duty_rate = item_rate['duty_rate']
         vat_rate = item_rate['vat_rate']
-        # price = float(form.price.data)
-        # duty = price * item_rate['duty_rate'] 
-        # vat = price * item_rate['vat_rate'] 
-        # total_price = price + duty + vat
+        
         
         item = Item(
             userid=current_user.id,
@@ -650,9 +647,8 @@ def add_item():
              "Duty Rate = " + str(duty_rate) + "%" + '\n' + 
              "VAT Rate = " + str(vat_rate) + "%"
             )
-       
             
-        flash("New Order Placed.", "Success")
+        flash("New Order Placed. Kindly click on invoice to confirm order.", "Success")
         # return redirect(url_for('show_rates', item_id=item.id))
         return redirect(url_for('admindashboard'))
 
@@ -1982,6 +1978,13 @@ def admindashboard():
         progress_category = Item.query.filter_by(status='in-progress').count() #User.query.filter_by(id=current_user.id).count()
         denied_category = Item.query.filter_by(status='denied').count() #User.query.filter_by(id=current_user.id).count()
         pending_category = Item.query.filter_by(status='pending').count() #User.query.filter_by(id=current_user.id).count()
+    elif current_user.role =='superadmin':
+        item = Item.query.count()
+        group = Groups.query.count() #User.query.filter_by(id=current_user.id).count()
+        completed_category = Item.query.filter_by(status='completed').count() #User.query.filter_by(id=current_user.id).count()
+        progress_category = Item.query.filter_by(status='in-progress').count() #User.query.filter_by(id=current_user.id).count()
+        denied_category = Item.query.filter_by(status='denied').count() #User.query.filter_by(id=current_user.id).count()
+        pending_category = Item.query.filter_by(status='pending').count() #User.query.filter_by(id=current_user.id).count()
     else:
         item = Item.query.filter_by(userid=str(current_user.id)).count()
         group = Groups.query.filter_by(userId=str(current_user.id)).count() #User.query.filter_by(id=current_user.id).count()
@@ -2040,10 +2043,36 @@ def allclients():
         # users = Person.query.order_by(Person.id.desc()).all()
         # staff = User.query.order_by(User.id.desc()).all()
         print(users)
+    elif current_user.role =="superadmin":
+        users = Person.query.filter_by(role="client").order_by(Person.id.desc()).all()
+        # users = Person.query.order_by(Person.id.desc()).all()
+        # staff = User.query.order_by(User.id.desc()).all()
+        print(users)
     else:
         # flash("youre not allowed to see this")
         return redirect (url_for("admindasboard"))
     return render_template('allclient.html',users=users,total_sms=total_sms)
+
+
+
+@app.route('/alladmin', methods=['GET', 'POST'])
+@login_required
+def alladmin():
+    total_sms=Committee.query.count()
+    if current_user.role == 'admin':
+        users = Person.query.filter_by(role="admin").order_by(Person.id.desc()).all()
+        # users = Person.query.order_by(Person.id.desc()).all()
+        # staff = User.query.order_by(User.id.desc()).all()
+        print(users)
+    elif current_user.role =="superadmin":
+        users = Person.query.filter_by(role="admin").order_by(Person.id.desc()).all()
+        # users = Person.query.order_by(Person.id.desc()).all()
+        # staff = User.query.order_by(User.id.desc()).all()
+        print(users)
+    else:
+        # flash("youre not allowed to see this")
+        return redirect (url_for("admindasboard"))
+    return render_template('alladmin.html',users=users,total_sms=total_sms)
 
 
 @app.route('/allstaff', methods=['GET', 'POST'])
@@ -2460,8 +2489,12 @@ def base():
 def clientid(userid):
     print("Fetching one")
     profile=Item.query.get_or_404(userid)
+    flash("Your invoice will be sent to you in 24 hours.")
+    
     # print(current_user)
     return render_template("gvs/clientid.html", profile=profile)
+
+
 
 @app.route('/message/<int:userid>', methods=['GET', 'POST'])
 def messages(userid):

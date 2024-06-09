@@ -221,13 +221,20 @@
      <li class="nav-item">
         <a class="nav-link collapsed" href="/allclients">
           <i class="bx bx-user-check"></i>
-          <span>All Clients</span>
+          <span>GVS Clients</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/alladmin">
+          <i class="bx bx-user-check"></i>
+          <span>GVS Admins</span>
         </a>
       </li>
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="/sms">
-          <i class="bx bx-message-dots"></i>
+          <i class="bx bx-envelope-open-fill"></i>
           <span>Send Bulk Message</span>
         </a>
       </li>
@@ -238,9 +245,62 @@
           <span>Show All Order</span>
         </a>
       </li>
-  
-      {% endif %}
 
+     
+  
+      {% elif current_user.role =='superadmin' %}
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/allclients">
+          <i class="bx bx-user-check"></i>
+          <span>GVS Clients</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/alladmin">
+          <i class="bx bx-user-check"></i>
+          <span>GVS Admins</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/sms">
+          <i class="bi bi-envelope-arrow-up"></i>
+          <span>Send Bulk Message</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/allorder">
+          <i class="bi bi-bookmarks"></i>
+          <span>Show All Order</span>
+        </a>
+      </li>
+ 
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/adminprofile">
+          <i class="bi bi-clipboard2-check"></i>
+          <span>Invoice</span>
+        </a>
+      </li>
+
+       
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/adminprofile">
+          <i class="bi bi-file-earmark-richtext"></i>
+          <span>Send Ads</span>
+        </a>
+      </li>
+
+    {% endif %}
+
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#">
+          <i class="bx bx-message-dots"></i>
+          <span>Chat</span>
+        </a>
+      </li>
    
       <!-- End Invoice Nav -->
 
@@ -250,6 +310,7 @@
           <span>Quotations</span>
         </a>
       </li><!-- End Quotations Nav -->
+
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="/adminprofile">
