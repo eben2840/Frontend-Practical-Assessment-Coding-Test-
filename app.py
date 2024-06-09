@@ -620,7 +620,7 @@ def add_item():
             country=selected_country,
             nation=selected_nation,
             unit=form.unit.data,
-          items_rates=selected_item,
+        #   items_rates=selected_item,
             name=form.name.data,
             group_id=form.group.data,
             start_date=form.start_date.data,
