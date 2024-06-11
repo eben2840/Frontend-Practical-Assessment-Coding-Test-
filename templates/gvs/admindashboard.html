@@ -64,10 +64,8 @@
     <hr>
     <div class="offcanvas-body">
       <p class="fs-5"><b>Product Details</b></p>
-      <form action="{{ url_for('admindashboard') }}" method="post" enctype="multipart/form-data" class="row" >
-        {{form.hidden_tag()}}
-     
-    
+      <form action="#" method="post" enctype="multipart/form-data" class="row" >
+      
         <div class="col-md-12">
           <span class="input-group-text mt-5">Click here or Drop file here to upload</span>
           <label for="image-picker" style="">
@@ -92,7 +90,7 @@
         </div>
         <div class="col-12 mt-3">
           <label for="inputAddress" class="form-label">Category <span class="text-danger">*</span></label>
-          {{form.cat()}}
+          
           <input type="text" name="cat" class="form-control" id="inputAddress" placeholder="1234 Main St">
         </div>
         <div class="col-12 mt-3">
@@ -250,8 +248,7 @@
           //    firebaseLink = downloadURL
              document.getElementById("firebaseLink").value = downloadURL
           //    console.log("Firebase Link: " + firebaseLink)
-              document.getElementById('submitButton').innerHTML = `{{form.submit (class="button")}}`
-  
+            
            });
               //    console.log(task);
               //    console.log(image);

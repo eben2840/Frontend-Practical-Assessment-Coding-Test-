@@ -36,12 +36,8 @@ app=Flask(__name__)
 CORS(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
-
 app.config['SECRET_KEY'] ="thisismysecretkey"
-app.config['UPLOADED_PHOTOS_DEST'] ='uploads'
-app.config['UPLOAD_FOLDER'] = 'uploads/pdfs' 
-UPLOAD_FOLDER = 'uploads'
-app.config['UPLOAD_FOLDER'] = 'uploads' 
+
 
 
 # photos=UploadSet('photos', IMAGES)
@@ -50,17 +46,13 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-
-
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
 login_manager.login_message_category = "info"
 migrate = Migrate(app, db)
 from forms import *
 
-# mailserver=os.environ.get("presto_mail_server")
-# mailport=os.environ.get("presto_mail_port")
-# mailpassword=os.environ.get("presto_mail_password")
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -105,122 +97,6 @@ class User(db.Model,UserMixin):
     
  
 
-
-
-# @app.route('/weekly-work', methods=['GET'])
-# def get_weekly_work():
-#     weekly_work = calculate_weekly_work()
-#     return jsonify({'weekly_work_hours': weekly_work})
-
-if not os.path.exists(UPLOAD_FOLDER):
-    os.makedirs(UPLOAD_FOLDER)
-    
-# @app.route('/backup_database', methods=['GET'])
-# def backup_database():
-#     source_db_path = 'test.db'  # Replace with the actual path to your SQLite database file.
-#     backup_db_path = 'your_database_backup.db'  # Replace with the desired path for the backup file.
-
-#     try:
-#         shutil.copy2(source_db_path, backup_db_path)
-#         return jsonify({'message': 'Database backup successful'})
-#     except Exception as e:
-#         return jsonify({'error': str(e)})
-
-
-
-# # Connect to the SQLite database
-# conn = sqlite3.connect('test.db')
-
-# # SQL query to select data from your table
-# query = "SELECT * FROM Person"
-
-# # Read data into a DataFrame
-# df = pd.read_sql_query(query, conn)
-
-# # Close the database connection
-# conn.close()
-
-# # Export the data to an Excel file (output.xlsx)
-# df.to_excel('output.xlsx', index=False)
-
-# print("Data has been exported to output.xlsx.")
-
-
-# email_sender = 'pay@prestoghana.com'
- 
- 
- 
-# @app.route("/sendsms", methods=["POST"])
-# def send_sms():
-#     if request.method == "POST":
-#         data = [{
-#         'name': '',  
-#         'sender_id': '',
-#         'mesaage': '',
-#     }]
-#     return jsonify (data)
-
-
-
-# @app.route('/send_email', methods=['POST'])
-# def send_email():
-#     if request.method == 'POST':
-#         email_receiver = [request.form['email'],'prestoghana@gmail.com', 'ebenmills200@gmail.com']
-        
-#         subject = '"Does what i do really matter?"'
-#         # html_content = render_template('try.html') 
-#         html_content = """
-#         <!DOCTYPE html>
-# <html>
-# <head>
-#     <style>
-#     @font-face {
-#         font-family: 'Plus Jakarta';
-#         src: url('PlusJakartaSans-VariableFont_wght.woff2') format('woff2-variations'),
-#              url('PlusJakartaSans-Italic-VariableFont_wght.woff2') format('woff2-variations');
-#         font-weight: 100 900; /* Adjust font weights based on available weights */
-#         font-style: normal;
-#     }
-
-#     body {
-#         font-family: 'Plus Jakarta', sans-serif;
-#     }
-# </style>
-
-# </head>
-# <body>
-#  <div class="container">
- 
-    
-#             <h4 class="h1 hero-title">Central University Campus Ministry</h4>
-#     <p>Hello there!. 
-#     <br/> We are grateful for your patience, your data has been retreived successfully.
-#     <br/> Have an amazing day.</p>
-
-#     <h1>
-#     </div>
-# </body>
-# </html>
-#         """
-
-
-#         em = EmailMessage()
-#         em['From'] = f"Presto Mail <{email_sender}>"
-#         em['To'] = email_receiver
-#         em['Subject'] = subject
-#         em.set_content('')  
-#         em.add_alternative(html_content, subtype='html')
-
-#         context = ssl.create_default_context()
-
-#         with smtplib.SMTP_SSL(mailserver, 465, context=context, ) as smtp:
-#             smtp.login(email_sender, mailpassword)
-#             smtp.sendmail(email_sender, email_receiver, em.as_string())
-    
-# #         return redirect(url_for('userbase'))
-# new=Committee(name=form.name.data, 
-#                   description=form.description.data,
-#                   )
 
 
 radio = 'yboateng057@gmail.com'
@@ -325,7 +201,7 @@ def adminlogin(userid):
     return redirect(url_for("admindashboard"))
 
 
- 
+
 
 @app.route('/admindashboard', methods=['GET', 'POST'])
 @login_required
