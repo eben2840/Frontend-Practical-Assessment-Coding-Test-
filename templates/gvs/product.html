@@ -1,0 +1,84 @@
+{% extends 'gvs/dashlayout.html' %}
+
+{% block body %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-success" role="alert">
+          {{ message }}
+        </div>
+        
+        
+      {% endfor %}
+    {% endif %}
+    {% endwith %}
+    
+    <section class="section dashboard">
+      <div class="row">
+
+            <h6 class="fs-3"><b>Product History</b></h6>
+
+            <!-- Recent Sales -->
+            <div class="col-12">
+              <div class="card recent-sales overflow-auto">
+
+                
+
+                <div class="card-body">
+
+                  <table class="table table-borderless datatable bg-gray">
+                    <thead>
+                      <tr class="bg-gray">
+                        <th scope="col">Name</th>
+                        <th scope="col">Variant</th>
+                        <th scope="col">Qty</th>
+                        <th scope="col">Min. Price</th>
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {%for users in users%}
+                      <tr>
+                       
+                       
+                        <td>{{users.product_name}}</td>
+                        <td>{{users.variant}}</td>
+                        <td>{{users.size}}</td>
+                        <td>{{users.price}}</td>
+
+                        <td>s</td>
+                     
+                       
+
+                     
+
+                                
+
+                               
+                 
+                                              
+                      
+                  
+                      </tr>
+                      {%endfor%}
+                    </tbody>
+                  </table>
+
+                </div>
+
+              </div>
+            </div>
+
+            
+
+       
+          </div>
+        </div>
+    
+
+        
+      </div>
+    </section>
+    
+    {%endblock body%}

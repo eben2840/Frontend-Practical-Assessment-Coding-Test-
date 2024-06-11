@@ -20,7 +20,7 @@ body {
 }
 
 a {
-  color: #4154f1;
+  color: #41f196;
   text-decoration: none;
 }
 
@@ -58,13 +58,14 @@ h6 {
 --------------------------------------------------------------*/
 .pagetitle {
   margin-bottom: 10px;
+  margin-top: 30px;
 }
 
 .pagetitle h1 {
-  font-size: 24px;
-  margin-bottom: 0;
-  font-weight: 600;
-  color: #012970;
+  font-size: 34px;
+  margin-top: 20px;
+  font-weight: 800;
+  color: #020202;
 }
 
 /*--------------------------------------------------------------
@@ -274,6 +275,48 @@ h6 {
 /* Accordion */
 .accordion-item {
   border: 1px solid #ebeef4;
+}
+
+.btn{
+background-color: #52b21b;
+border: none;
+font-size: 16px;
+padding:14px;
+width:150px;
+border-radius: 50px;
+}
+
+.btnover{
+  background-color: #52b21b;
+  border: none;
+  font-size: 16px;
+  color:#fff;
+  padding:14px;
+  width:200px;
+  border-radius: 50px;
+  }
+
+
+.btn-over{
+  background-color: none;
+  border: 1px solid #52b21b;
+  font-size: 16px;
+  margin-right:20px;
+  color:#52b21b;
+  padding:14px;
+  width:250px;
+  border-radius: 50px;
+  }
+
+.login{ 
+width: 100%;
+padding: 20px;
+background-color: #52b21b;
+border: none;
+border-radius: 50px;
+color: white;
+
+cursor: pointer;
 }
 
 .accordion-button:focus {
@@ -754,7 +797,7 @@ h6 {
 }
 
 .sidebar-nav .nav-content a.active i {
-  background-color: #4154f1;
+  background-color: #61f141;
 }
 
 /*--------------------------------------------------------------

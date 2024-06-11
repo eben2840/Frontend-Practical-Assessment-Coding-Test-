@@ -4,8 +4,23 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  
 
-  <title>GVSGROUP | Dashboard</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+ 
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -31,13 +46,7 @@
   <!-- Template Main CSS File -->
   <link href="static/asset/css/style.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Updated: Apr 7 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+
 </head>
 
 <body>
@@ -47,88 +56,28 @@
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="/" class="logo d-flex align-items-center">
-        <img src="static/assets/img/log.png" alt="">
+       <h1 class="py-5"><b>Syst</b></h1>
       
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
-   <!-- <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="#">
-        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-      </form>
-    </div>-->
-    <!-- End Search Bar -->
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
 
-        <!--<li class="nav-item d-block d-lg-none">
-          <a class="nav-link nav-icon search-bar-toggle " href="#">
-            <i class="bi bi-search"></i>
-          </a>
-        </li>-->
-        <!-- End Search Icon-->
-
+        <li>
+        <a class="nav-link nav-icon bg-success text-light p-1 align-center" style="border-radius:70px; width:85px;" href="#" data-bs-toggle="dropdown">
+          <i class="bi bi-cart ml-3" style="margin-right:10px; margin-left:10px;" ></i> o
+     
+        </a>
+      </li>
         <li class="nav-item dropdown">
 
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">
-            {% if total_sms == 'none' %}
-            1
-            {%endif%}
-            {{total_sms}}
-            </span>
+           
           </a><!-- End Notification Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              You have {{total_sms}} new notifications
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-         
-
-          
-            <!--<li class="notification-item">
-              <i class="bi bi-info-circle text-primary"></i>
-              <div> 
-                <h4>Welcome {{current_user.name}}</h4>
-                <p>Enjoy our delivery packages. Kindly reach out to our <a href="">Customer Support</a> if you have any requests</p>
-               
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-           -->
-
-            {%for sms in sms%}
-           <a href="{{url_for("messages", userid=sms.id)}}"> <li class="notification-item">
-              <i class="bi bi-info-circle text-primary"></i>
-              <div> 
-                <h4> {{sms.name}}</h4>
-                <p>{{sms.description}}</p>
-                <!--<p>4 hrs. ago</p>-->
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-          </a>
-            
-            {%endfor%}
-            <li class="dropdown-footer">
-              <a href="#">Powered By GVSGROUP</a>
-            </li>
-          </ul><!-- End Notification Dropdown Items -->
 
         </li><!-- End Notification Nav -->
 
@@ -190,132 +139,38 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
 
-      <li class="nav-heading">{{current_user.name}} Dashboard</li>
 
       <li class="nav-item">
         <a class="nav-link " href="/admindashboard">
           <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
+          <span>Home</span>
         </a>
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="/group">
-          <i class="bx bx-plus"></i>
-          <span>Create Order Name</span>
+        <a class="nav-link collapsed" href="/product">
+          <i class="bi bi-collection"></i>
+          <span>Products</span>
         </a>
       </li>
       
       <!-- End Quotations Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="add_item">
-          <i class="bx bx-cart"></i>
-          <span>Place Order</span>
+        <a class="nav-link collapsed" href="/order">
+          <i class="bi bi-cart3"></i>
+          <span>Order</span>
         </a>
       </li>
       <!-- End Quotations Nav -->
 
-      {% if current_user.role =='admin'%}
-
-     <li class="nav-item">
-        <a class="nav-link collapsed" href="/allclients">
-          <i class="bx bx-user-check"></i>
-          <span>GVS Clients</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/alladmin">
-          <i class="bx bx-user-check"></i>
-          <span>GVS Admins</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/sms">
-          <i class="bx bx-envelope-open-fill"></i>
-          <span>Send Bulk Message</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/allorder">
-          <i class="bx bx-bookmarks"></i>
-          <span>Show All Order</span>
-        </a>
-      </li>
-
-     
-  
-      {% elif current_user.role =='superadmin' %}
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/allclients">
-          <i class="bx bx-user-check"></i>
-          <span>GVS Clients</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/alladmin">
-          <i class="bx bx-user-check"></i>
-          <span>GVS Admins</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/sms">
-          <i class="bi bi-envelope-arrow-up"></i>
-          <span>Send Bulk Message</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/allorder">
-          <i class="bi bi-bookmarks"></i>
-          <span>Show All Order</span>
-        </a>
-      </li>
- 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/adminprofile">
-          <i class="bi bi-clipboard2-check"></i>
-          <span>Invoice</span>
-        </a>
-      </li>
-
-       
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/adminprofile">
-          <i class="bi bi-file-earmark-richtext"></i>
-          <span>Send Ads</span>
-        </a>
-      </li>
-
-    {% endif %}
+    
 
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="#">
-          <i class="bx bx-message-dots"></i>
-          <span>Chat</span>
-        </a>
-      </li>
-   
-      <!-- End Invoice Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/quotes">
           <i class="bi bi-bar-chart"></i>
-          <span>Quotations</span>
-        </a>
-      </li><!-- End Quotations Nav -->
-
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/adminprofile">
-          <i class="bi bi-gear"></i>
-          <span>Settings</span>
+          <span>Report</span>
         </a>
       </li>
      
@@ -384,6 +239,120 @@
 
   <!-- Template Main JS File -->
   <script src="static/asset/js/main.js"></script>
+
+ <!-- Bootstrap JavaScript and Popper.js (Order is important) -->
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+ <!-- Triggering the Toast -->
+<!-- Your existing HTML code -->
+
+<!-- Bootstrap JS (Make sure to include Popper.js and Bootstrap JS) -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+<!-- Your custom JavaScript code -->
+
+
+<!-- Your existing HTML code -->
+
+
+  <script async="" type="text/javascript" src="https://www.myhealth1st.com.au/mh1-widget/2021/popup.v3.js"></script>
+  <!-- End of MyHealth1st Widget code -->
+
+  <!-- 
+    - custom js link
+
+  <!-- 
+    - ionicon link
+  -->
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-storage.js"></script>
+  
+  <!-- <script defer src="//firebase/8.9.1/firebase-storage.js"></script> -->
+  
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Simulate delay for demonstration purposes
+        setTimeout(function () {
+            // Hide loading screen and display content
+            document.getElementById("loadingScreen").style.display = "none";
+            document.getElementById("mainContent").style.display = "block";
+        }, 2000); // Adjust the delay time as needed
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Triggering the Toast -->
+  <script>
+    var toastElement = new bootstrap.Toast(document.querySelector('.toast'));
+    toastElement.show();
+  </script>
+  
+  
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-storage.js"></script>
+  
+  <!-- <script defer src="//firebase/8.9.1/firebase-storage.js"></script> -->
+  
+<!-- Bootstrap JS (Make sure to include Popper.js and Bootstrap JS) -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+<!-- Your custom JavaScript code -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var liveToastBtn = document.getElementById('liveToastBtn');
+        var liveToast = new bootstrap.Toast(document.getElementById('liveToast'));
+
+        liveToastBtn.addEventListener('click', function () {
+            liveToast.show();
+        });
+    });
+</script>
+
+  <script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyBPHDVrXV4nn_4agQgWFItDlS8z9cvq5zw",
+      authDomain: "centralalumni.firebaseapp.com",
+      projectId: "centralalumni",
+      storageBucket: "centralalumni.appspot.com",
+      messagingSenderId: "270504690849",
+      appId: "1:270504690849:web:b03ee12ab92e157196dce0",
+      measurementId: "G-9T21K58F10"
+    };
+    
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
+  <script src="static/assets/js/script.js"></script>
+
+  <!-- 
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
 
 </body>
 
